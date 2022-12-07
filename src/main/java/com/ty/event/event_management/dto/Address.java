@@ -9,20 +9,17 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-
+@Entity
 @Getter
 @Setter
-@Entity
-public class Venue {
+public class Address {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int venueid;
+	private int addressid;
 	@NotNull
 	private String name;
 	@NotNull
-	private String address;
-	@NotNull
-	private long phone;
+	private String location;
 
 }
