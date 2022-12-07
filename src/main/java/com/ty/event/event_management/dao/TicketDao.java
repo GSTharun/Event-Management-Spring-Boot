@@ -22,7 +22,7 @@ public class TicketDao {
 		return ticketRepository.save(ticket);
 	}
 
-	public Ticket findTicketById(int id) {
+	public Ticket getTicketById(int id) {
 		Optional<Ticket> optional = ticketRepository.findById(id);
 
 		if (optional.isPresent()) {
