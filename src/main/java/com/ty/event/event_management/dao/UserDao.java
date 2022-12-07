@@ -11,7 +11,7 @@ import com.ty.event.event_management.repository.UserRepository;
 @Repository
 public class UserDao {
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
 	public User saveUser(User user) {
 		return userRepository.save(user);

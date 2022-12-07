@@ -11,7 +11,7 @@ import com.ty.event.event_management.repository.AdminRepository;
 @Repository
 public class AdminDao {
 	@Autowired
-	AdminRepository adminRepository;
+	private AdminRepository adminRepository;
 
 	public Admin saveAdmin(Admin admin) {
 		return adminRepository.save(admin);

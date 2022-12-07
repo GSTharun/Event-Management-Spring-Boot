@@ -11,7 +11,7 @@ import com.ty.event.event_management.repository.StaffRepository;
 @Repository
 public class StaffDao {
 	@Autowired
-	StaffRepository staffRepository;
+	private StaffRepository staffRepository;
 
 	public Staff saveStaff(Staff staff) {
 		return staffRepository.save(staff);

@@ -12,7 +12,7 @@ import com.ty.event.event_management.repository.AgentRepository;
 public class AgentDao {
 
 	@Autowired
-	AgentRepository agentRepository;
+	private AgentRepository agentRepository;
 
 	public Agent saveAgent(Agent agent) {
 		return agentRepository.save(agent);
