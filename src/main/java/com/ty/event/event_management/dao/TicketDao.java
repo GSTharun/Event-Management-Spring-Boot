@@ -9,20 +9,20 @@ import com.ty.event.event_management.dto.Ticket;
 import com.ty.event.event_management.repository.TicketRepository;
 
 @Repository
-public class TicektDao {
+public class TicketDao {
 
 	@Autowired
-	TicketRepository ticketRepository;
+	private TicketRepository ticketRepository;
 
-	public Ticket saveTiceket(Ticket ticket) {
+	public Ticket saveTicket(Ticket ticket) {
 		return ticketRepository.save(ticket);
 	}
 
-	public Ticket updateTiceket(Ticket ticket) {
+	public Ticket updateTicket(Ticket ticket) {
 		return ticketRepository.save(ticket);
 	}
 
-	public Ticket findTiceketById(int id) {
+	public Ticket findTicketById(int id) {
 		Optional<Ticket> optional = ticketRepository.findById(id);
 
 		if (optional.isPresent()) {
@@ -31,7 +31,7 @@ public class TicektDao {
 		return null;
 	}
 
-	public void deleteTicektById(Ticket ticket) {
+	public void deleteTicket(Ticket ticket) {
 
 		ticketRepository.delete(ticket);
 
