@@ -13,7 +13,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Entity
@@ -37,8 +36,6 @@ public class User {
 	private String dob;
 
 	@OneToMany
-	private List<EventDetails>eventDetails;
-
-
+	private List<EventDetails> eventDetails;
 
 }

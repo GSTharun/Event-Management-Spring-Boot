@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ty.event.event_management.dto.EventHall;
 
-public interface EventHallRepository extends JpaRepository<EventHall, Integer>{
+public interface EventHallRepository extends JpaRepository<EventHall, Integer> {
 
 }
