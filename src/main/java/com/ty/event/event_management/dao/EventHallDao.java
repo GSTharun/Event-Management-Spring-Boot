@@ -30,9 +30,9 @@ public class EventHallDao {
 		return null;
 	}
 
-	public String deleteEventHall(int id) {
-		repository.deleteById(id);
-		return "deleted";
+	public void deleteEventHall(EventHall eventHall) {
+		repository.delete(eventHall);
+	
 	}
 
 }

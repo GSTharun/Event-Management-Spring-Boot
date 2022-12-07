@@ -30,9 +30,9 @@ public class VenueDao {
 		return null;
 	}
 
-	public String deleteVenue(int id) {
-		repository.deleteById(id);
-		return "deleted";
+	public void deleteVenue(Venue venue) {
+		repository.delete(venue);
+		
 	}
 
 }
