@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -24,5 +25,10 @@ public class Venue {
 	private String address;
 	@NotNull
 	private long phone;
+
+	@OneToOne
+	private EventDetails eventDetail; 
+	@OneToOne
+	private Ticket ticket;
 
 }
