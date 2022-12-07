@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Entity
@@ -22,16 +21,16 @@ public class Agent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int agentid;
 	@NotNull
-private String agentname;
+	private String agentname;
 	@NotNull
-private String agentemail;
+	private String agentemail;
 	@NotNull
-private long phone;
-	
+	private long phone;
+
 	@OneToMany(mappedBy = "agent")
-	private List<EventDetails>details ;
-	
+	private List<EventDetails> details;
+
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Staff>staffs;
-	
+	private List<Staff> staffs;
+
 }

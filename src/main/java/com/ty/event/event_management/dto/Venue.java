@@ -10,12 +10,11 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Entity
 public class Venue {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int venueid;
@@ -27,7 +26,7 @@ public class Venue {
 	private long phone;
 
 	@OneToOne
-	private EventDetails eventDetail; 
+	private EventDetails eventDetail;
 	@OneToOne
 	private Ticket ticket;
 

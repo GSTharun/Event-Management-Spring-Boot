@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ty.event.event_management.dto.Venue;
 
-public interface VenueRepository extends JpaRepository<Venue, Integer>{
+public interface VenueRepository extends JpaRepository<Venue, Integer> {
 
 }

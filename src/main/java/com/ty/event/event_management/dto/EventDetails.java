@@ -1,7 +1,5 @@
 package com.ty.event.event_management.dto;
 
-
-
 import java.sql.Date;
 import java.sql.Time;
 
@@ -17,7 +15,6 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Entity
@@ -27,7 +24,7 @@ public class EventDetails {
 
 	private int eventId;
 	@NotNull
-	private  String eventTitle;
+	private String eventTitle;
 	@NotNull
 	private String address;
 	@NotNull
@@ -42,15 +39,14 @@ public class EventDetails {
 	private String equipment;
 	@NotNull
 	private String entertainment;
-	
+
 	@ManyToOne
 	private User user;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Agent agent;
-	
+
 	@ManyToOne
 	private EventHall evHall;
-	
 
 }
