@@ -21,15 +21,14 @@ public class EventDetailsDao {
 		return repository.save(eventDetails);
 	}
 
-	public EventDetails getEventDetailsById(int id) {
-		Optional<EventDetails> evOptional=repository.findById(id);
-		if(evOptional.isEmpty()) {
-			return null;
-
-		}else {
-			return evOptional.get();
+	public Optional<EventDetails> getEventDetailsById(int id) {
+		Optional<EventDetails> evOptional = repository.findById(id);
+		if (evOptional.isPresent()) {
+			evOptional.get();
 		}
+		return evOptional;
 	}
+
 	public void deleteEventDetails(EventDetails eventDetails) {
 		repository.delete(eventDetails);
 	}
