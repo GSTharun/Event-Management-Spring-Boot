@@ -22,13 +22,13 @@ public class TicketDao {
 		return ticketRepository.save(ticket);
 	}
 
-	public Ticket getTicketById(int id) {
+	public Optional<Ticket> getTicketById(int id) {
 		Optional<Ticket> optional = ticketRepository.findById(id);
 
 		if (optional.isPresent()) {
-			return optional.get();
+		 optional.get();
 		}
-		return null;
+		return optional;
 	}
 
 	public void deleteTicket(Ticket ticket) {
