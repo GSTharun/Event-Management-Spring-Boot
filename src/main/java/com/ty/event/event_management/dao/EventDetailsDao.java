@@ -22,11 +22,7 @@ public class EventDetailsDao {
 	}
 
 	public Optional<EventDetails> getEventDetailsById(int id) {
-		Optional<EventDetails> evOptional = repository.findById(id);
-		if (evOptional.isPresent()) {
-			evOptional.get();
-		}
-		return evOptional;
+		return repository.findById(id);
 	}
 
 	public void deleteEventDetails(EventDetails eventDetails) {
