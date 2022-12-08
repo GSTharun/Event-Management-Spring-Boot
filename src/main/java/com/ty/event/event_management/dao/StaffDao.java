@@ -23,7 +23,7 @@ public class StaffDao {
 
 	public Optional<Staff> getStaffById(int id) {
 		Optional<Staff> optional = staffRepository.findById(id);
-		if (optional.isEmpty()) {
+		if (optional.isPresent()) {
 			optional.get();
 		}
 		return optional;

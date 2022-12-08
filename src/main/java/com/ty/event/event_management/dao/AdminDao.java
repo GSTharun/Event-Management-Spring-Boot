@@ -23,7 +23,7 @@ public class AdminDao {
 
 	public Optional<Admin> getAdminById(int id) {
 		Optional<Admin> optional = adminRepository.findById(id);
-		if (optional.isEmpty()) {
+		if (optional.isPresent()) {
 			optional.get();
 		}
 		return optional;

@@ -21,9 +21,9 @@ public class UserDao {
 		return userRepository.save(user);
 	}
 
-	public Optional<User>  getUserById(int id) {
+	public Optional<User> getUserById(int id) {
 		Optional<User> optional = userRepository.findById(id);
-		if (optional.isEmpty()) {
+		if (optional.isPresent()) {
 			optional.get();
 
 		}
