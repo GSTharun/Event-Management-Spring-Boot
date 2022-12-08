@@ -22,12 +22,8 @@ public class UserDao {
 	}
 
 	public Optional<User> getUserById(int id) {
-		Optional<User> optional = userRepository.findById(id);
-		if (optional.isPresent()) {
-			optional.get();
-
-		}
-		return optional;
+		return userRepository.findById(id);
+		
 
 	}
 

@@ -22,11 +22,7 @@ public class AdminDao {
 	}
 
 	public Optional<Admin> getAdminById(int id) {
-		Optional<Admin> optional = adminRepository.findById(id);
-		if (optional.isPresent()) {
-			optional.get();
-		}
-		return optional;
+		return adminRepository.findById(id);
 	}
 
 	public void deleteAdmin(Admin admin) {

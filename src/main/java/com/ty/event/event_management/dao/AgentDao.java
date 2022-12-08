@@ -23,11 +23,7 @@ public class AgentDao {
 	}
 
 	public Optional<Agent> getAgentById(int id) {
-		Optional<Agent> optional = agentRepository.findById(id);
-		if (optional.isPresent()) {
-			optional.get();
-		}
-		return optional;
+		return agentRepository.findById(id);
 	}
 
 	public void deleteAgent(Agent agent) {
