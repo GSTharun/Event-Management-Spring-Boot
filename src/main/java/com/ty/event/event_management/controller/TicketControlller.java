@@ -3,7 +3,7 @@ package com.ty.event.event_management.controller;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +19,10 @@ import com.ty.event.event_management.dto.Ticket;
 import com.ty.event.event_management.service.TicketService;
 import com.ty.event.event_management.util.ResponseStructure;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+
 
 @RestController
-@RequestMapping("Ticket")
+@RequestMapping("ticket")
 public class TicketControlller {
 
 	@Autowired
@@ -43,9 +41,9 @@ public class TicketControlller {
 	}
 
 	@GetMapping
-	public ResponseEntity<ResponseStructure<Ticket>> grtTicketByid(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Ticket>> getTicketByid(@RequestParam int id) {
 
-		return ticketService.deleteTicketById(id);
+		return ticketService.getTicketById(id);
 	}
 
 	@DeleteMapping("/{id}")
