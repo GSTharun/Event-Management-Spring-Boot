@@ -35,9 +35,9 @@ public class TicketControlller {
 	}
 
 	@PutMapping
-	public ResponseEntity<ResponseStructure<Ticket>> updateTicket(@RequestBody Ticket ticket, @RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Ticket>> updateTicket(@RequestBody Ticket ticket) {
 
-		return ticketService.updateTicketById(ticket, id);
+		return ticketService.updateTicketById(ticket);
 	}
 
 	@GetMapping

@@ -29,8 +29,8 @@ public class UserController {
 	}
 
 	@PutMapping
-	ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User user, @RequestParam int id) {
-		return userService.updateUser(user, id);
+	ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User user) {
+		return userService.updateUser(user);
 	}
 
 	@GetMapping

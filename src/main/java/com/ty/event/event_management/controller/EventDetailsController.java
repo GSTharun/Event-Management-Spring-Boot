@@ -33,8 +33,8 @@ public class EventDetailsController {
 
 
 	@PutMapping
-	public ResponseEntity<ResponseStructure<EventDetails>> updateEventDetails(@RequestBody EventDetails eventDetails,@RequestParam int id){
-		return evService.updateEventDetailsById(eventDetails, id);
+	public ResponseEntity<ResponseStructure<EventDetails>> updateEventDetails(@RequestBody EventDetails eventDetails){
+		return evService.updateEventDetailsById(eventDetails);
 	}
 
 

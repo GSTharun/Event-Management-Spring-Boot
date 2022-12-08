@@ -26,9 +26,9 @@ public class TicketService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<Ticket>> updateTicketById(Ticket ticket, int id) {
+	public ResponseEntity<ResponseStructure<Ticket>> updateTicketById(Ticket ticket) {
 		ResponseStructure<Ticket> responseStructure = new ResponseStructure<Ticket>();
-		Optional<Ticket> optional = ticketDao.getTicketById(id);
+		Optional<Ticket> optional = ticketDao.getTicketById(ticket.getTicketid());
 		if (optional.isPresent()) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("updated");

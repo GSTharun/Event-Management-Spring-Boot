@@ -22,7 +22,7 @@ public class Address {
 	private String name;
 	@NotNull
 	private String location;
-
-	@OneToOne
+	
+	@OneToOne(mappedBy = "address")
 	private EventHall eventHall;
 }

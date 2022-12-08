@@ -28,12 +28,11 @@ public class StaffService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<Staff>> updateStaff(Staff staff, int id) {
+	public ResponseEntity<ResponseStructure<Staff>> updateStaff(Staff staff) {
 		ResponseEntity<ResponseStructure<Staff>> responseEntity;
 		ResponseStructure<Staff> responseStructure = new ResponseStructure<Staff>();
-		Optional<Staff> optional = staffdao.getStaffById(id);
+		Optional<Staff> optional = staffdao.getStaffById(staff.getStaffid());
 		if (optional.isPresent()) {
-			optional.get();
 			   staffdao.deleteStaff(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");

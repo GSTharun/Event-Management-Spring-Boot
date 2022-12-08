@@ -25,11 +25,10 @@ public class AddressService {
 		return new ResponseEntity<ResponseStructure<Address>>(responseStructure, HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<ResponseStructure<Address>> updateAddress(Address address, int id) {
+	public ResponseEntity<ResponseStructure<Address>> updateAddress(Address address) {
 		ResponseStructure<Address> responseStructure = new ResponseStructure<Address>();
-		Optional<Address> optional = dao.getAddressById(id);
+		Optional<Address> optional = dao.getAddressById(address.getAddressid());
 		if (optional.isPresent()) {
-			optional.get();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(dao.updateAddress(address));

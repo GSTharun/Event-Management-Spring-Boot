@@ -26,13 +26,12 @@ public class EventDetailsService {
 		return responseEntity;
 	}
 
-	public ResponseEntity<ResponseStructure<EventDetails>> updateEventDetailsById(EventDetails eventDetails, int id) {
+	public ResponseEntity<ResponseStructure<EventDetails>> updateEventDetailsById(EventDetails eventDetails) {
 		ResponseStructure<EventDetails> responseStructure = new ResponseStructure<EventDetails>();
 		ResponseEntity<ResponseStructure<EventDetails>> responseEntity = new ResponseEntity<ResponseStructure<EventDetails>>(
 				responseStructure, HttpStatus.OK);
-		Optional<EventDetails> optional = evDetailsDao.getEventDetailsById(id);
+		Optional<EventDetails> optional = evDetailsDao.getEventDetailsById(eventDetails.getEventId());
 		if (optional.isPresent()) {
-			optional.get();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("updated");
 			responseStructure.setData(evDetailsDao.updateEventDetails(eventDetails));
