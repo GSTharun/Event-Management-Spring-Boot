@@ -22,12 +22,8 @@ public class AddressDao {
 		return repository.save(address);
 	}
 
-	public Address getAddressById(int id) {
-		Optional<Address> optional = repository.findById(id);
-		if (optional.isPresent()) {
-			return optional.get();
-		}
-		return null;
+	public Optional<Address> getAddressById(int id) {
+		return repository.findById(id);
 	}
 
 	public void deleteAddress(Address address) {

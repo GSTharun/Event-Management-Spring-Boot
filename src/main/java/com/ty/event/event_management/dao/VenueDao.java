@@ -22,17 +22,14 @@ public class VenueDao {
 		return repository.save(venue);
 	}
 
-	public Venue getVenueById(int id) {
-		Optional<Venue> optional = repository.findById(id);
-		if (optional.isPresent()) {
-			return optional.get();
-		}
-		return null;
+	public Optional<Venue> getVenueById(int id) {
+		return repository.findById(id);
+
 	}
 
 	public void deleteVenue(Venue venue) {
 		repository.delete(venue);
-		
+
 	}
 
 }
