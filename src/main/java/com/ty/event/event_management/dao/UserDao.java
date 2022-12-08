@@ -21,13 +21,13 @@ public class UserDao {
 		return userRepository.save(user);
 	}
 
-	public User getUserById(int id) {
+	public Optional<User> getUserById(int id) {
 		Optional<User> optional = userRepository.findById(id);
-		if (optional.isEmpty()) {
-			return null;
+		if (optional.isPresent()) {
+			optional.get();
 
 		}
-		return optional.get();
+		return optional;
 
 	}
 

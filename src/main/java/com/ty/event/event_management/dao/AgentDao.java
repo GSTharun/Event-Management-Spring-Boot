@@ -22,12 +22,12 @@ public class AgentDao {
 		return agentRepository.save(agent);
 	}
 
-	public Agent getAgentById(int id) {
+	public Optional<Agent> getAgentById(int id) {
 		Optional<Agent> optional = agentRepository.findById(id);
-		if (optional.isEmpty()) {
-			return null;
+		if (optional.isPresent()) {
+			optional.get();
 		}
-		return optional.get();
+		return optional;
 	}
 
 	public void deleteAgent(Agent agent) {

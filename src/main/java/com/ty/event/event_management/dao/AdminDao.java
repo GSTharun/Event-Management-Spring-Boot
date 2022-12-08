@@ -21,12 +21,12 @@ public class AdminDao {
 		return adminRepository.save(admin);
 	}
 
-	public Admin getAdminById(int id) {
+	public Optional<Admin> getAdminById(int id) {
 		Optional<Admin> optional = adminRepository.findById(id);
-		if (optional.isEmpty()) {
-			return null;
+		if (optional.isPresent()) {
+			optional.get();
 		}
-		return optional.get();
+		return optional;
 	}
 
 	public void deleteAdmin(Admin admin) {
