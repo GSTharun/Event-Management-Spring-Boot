@@ -22,17 +22,14 @@ public class EventHallDao {
 		return repository.save(eventHall);
 	}
 
-	public EventHall getEventHallById(int id) {
-		Optional<EventHall> optional = repository.findById(id);
-		if (optional.isPresent()) {
-			return optional.get();
-		}
-		return null;
+	public Optional<EventHall> getEventHallById(int id) {
+		return repository.findById(id);
+
 	}
 
 	public void deleteEventHall(EventHall eventHall) {
 		repository.delete(eventHall);
-	
+
 	}
 
 }
