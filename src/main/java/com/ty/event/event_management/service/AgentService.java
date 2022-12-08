@@ -15,7 +15,7 @@ import com.ty.event.event_management.util.ResponseStructure;
 public class AgentService {
 
 	@Autowired
-	AgentDao agentdao;
+	private AgentDao agentdao;
 
 	public ResponseEntity<ResponseStructure<Agent>> saveAgent(Agent agent) {
 		ResponseEntity<ResponseStructure<Agent>> responseEntity;
