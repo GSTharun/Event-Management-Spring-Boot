@@ -23,12 +23,8 @@ public class TicketDao {
 	}
 
 	public Optional<Ticket> getTicketById(int id) {
-		Optional<Ticket> optional = ticketRepository.findById(id);
-
-		if (optional.isPresent()) {
-		 optional.get();
-		}
-		return optional;
+		return ticketRepository.findById(id);
+	
 	}
 
 	public void deleteTicket(Ticket ticket) {
