@@ -17,7 +17,7 @@ public class AdminService {
 	@Autowired
 	private AdminDao adminDao;
 
-	ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin) {
+	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin) {
 		ResponseEntity<ResponseStructure<Admin>> responseEntity;
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		responseStructure.setStatus(HttpStatus.CREATED.value());
@@ -27,7 +27,7 @@ public class AdminService {
 
 	}
 
-	ResponseEntity<ResponseStructure<Admin>> updateAdmin(Admin admin, int id) {
+	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(Admin admin, int id) {
 		ResponseEntity<ResponseStructure<Admin>> responseEntity;
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		Optional<Admin> optional = adminDao.getAdminById(id);
@@ -43,7 +43,7 @@ public class AdminService {
 
 	}
 
-	ResponseEntity<ResponseStructure<Admin>> getAdminById(int id) {
+	public ResponseEntity<ResponseStructure<Admin>> getAdminById(int id) {
 		ResponseEntity<ResponseStructure<Admin>> responseEntity;
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		Optional<Admin> optional = adminDao.getAdminById(id);
@@ -57,7 +57,7 @@ public class AdminService {
 		throw null;
 	}
 
-	ResponseEntity<ResponseStructure<Admin>> deleteAdminById(int id) {
+	public ResponseEntity<ResponseStructure<Admin>> deleteAdminById(int id) {
 		ResponseEntity<ResponseStructure<Admin>> responseEntity;
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		Optional<Admin> optional = adminDao.getAdminById(id);
