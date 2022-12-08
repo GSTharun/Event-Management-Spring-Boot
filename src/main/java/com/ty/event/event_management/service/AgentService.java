@@ -33,8 +33,6 @@ public class AgentService {
 		ResponseStructure<Agent> responseStructure = new ResponseStructure<Agent>();
 		Optional<Agent> optional = agentdao.getAgentById(id);
 		if (optional.isPresent()) {
-			optional.get();
-
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(agentdao.saveAgent(agent));
@@ -49,7 +47,6 @@ public class AgentService {
 		ResponseStructure<Agent> responseStructure = new ResponseStructure<Agent>();
 		Optional<Agent> optional = agentdao.getAgentById(id);
 		if (optional.isPresent()) {
-
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data found");
 			responseStructure.setData(optional.get());
@@ -64,7 +61,7 @@ public class AgentService {
 		ResponseStructure<Agent> responseStructure = new ResponseStructure<Agent>();
 		Optional<Agent> optional = agentdao.getAgentById(id);
 		if (optional.isPresent()) {
-			agentdao.deleteAgent(optional.get());
+		
 			   agentdao.deleteAgent(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Deleted");
@@ -73,6 +70,7 @@ public class AgentService {
 		}
 
 		throw null;
+
 	}
 
 }
