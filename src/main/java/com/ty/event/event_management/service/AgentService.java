@@ -58,8 +58,7 @@ public class AgentService {
 		ResponseStructure<Agent> responseStructure = new ResponseStructure<Agent>();
 		Optional<Agent> optional = agentdao.getAgentById(id);
 		if (optional.isPresent()) {
-			agentdao.deleteAgent(optional.get());
-			agentdao.deleteAgent(optional.get());
+			   agentdao.deleteAgent(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Deleted");
 			responseStructure.setData(optional.get());
@@ -67,6 +66,7 @@ public class AgentService {
 		}
 
 		throw null;
+
 	}
 
 }
