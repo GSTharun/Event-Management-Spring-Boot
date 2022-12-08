@@ -62,7 +62,7 @@ public class AdminService {
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		Optional<Admin> optional = adminDao.getAdminById(id);
 		if (optional.isPresent()) {
-
+            adminDao.deleteAdmin(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Deleted");
 			responseStructure.setData(optional.get());

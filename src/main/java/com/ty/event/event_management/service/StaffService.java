@@ -34,7 +34,7 @@ public class StaffService {
 		Optional<Staff> optional = staffdao.getStaffById(id);
 		if (optional.isPresent()) {
 			optional.get();
-
+			   staffdao.deleteStaff(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(staffdao.saveStaff(staff));

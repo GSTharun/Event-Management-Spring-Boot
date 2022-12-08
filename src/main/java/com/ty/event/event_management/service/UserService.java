@@ -33,7 +33,7 @@ public class UserService {
 		Optional<User> optional = userDao.getUserById(id);
 		if (optional.isPresent()) {
 			optional.get();
-
+			   userDao.deleteUser(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(userDao.saveUser(user));
