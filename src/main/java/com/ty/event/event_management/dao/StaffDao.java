@@ -21,12 +21,12 @@ public class StaffDao {
 		return staffRepository.save(staff);
 	}
 
-	public Staff getStaffById(int id) {
+	public Optional<Staff> getStaffById(int id) {
 		Optional<Staff> optional = staffRepository.findById(id);
 		if (optional.isEmpty()) {
-			return null;
+			optional.get();
 		}
-		return optional.get();
+		return optional;
 	}
 
 	public void deleteStaff(Staff staff) {
