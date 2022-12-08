@@ -22,11 +22,7 @@ public class StaffDao {
 	}
 
 	public Optional<Staff> getStaffById(int id) {
-		Optional<Staff> optional = staffRepository.findById(id);
-		if (optional.isPresent()) {
-			optional.get();
-		}
-		return optional;
+		return staffRepository.findById(id);
 	}
 
 	public void deleteStaff(Staff staff) {
