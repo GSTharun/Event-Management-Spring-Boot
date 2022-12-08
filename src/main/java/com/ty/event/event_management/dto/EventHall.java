@@ -31,6 +31,7 @@ public class EventHall {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	List<EventDetails> evDetails;
-	@OneToOne
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 }

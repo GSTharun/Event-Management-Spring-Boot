@@ -27,13 +27,11 @@ public class UserService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<User>> updateUser(User user, int id) {
+	public ResponseEntity<ResponseStructure<User>> updateUser(User user) {
 		ResponseEntity<ResponseStructure<User>> responseEntity;
 		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
-		Optional<User> optional = userDao.getUserById(id);
+		Optional<User> optional = userDao.getUserById(user.getUserid());
 		if (optional.isPresent()) {
-			optional.get();
-			   userDao.deleteUser(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(userDao.saveUser(user));

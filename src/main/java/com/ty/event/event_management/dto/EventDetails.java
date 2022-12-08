@@ -2,6 +2,7 @@ package com.ty.event.event_management.dto;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -28,9 +29,9 @@ public class EventDetails {
 	@NotNull
 	private String address;
 	@NotNull
-	private Date eventDate;
+	private LocalDateTime eventDate;
 	@NotNull
-	private Time eventTime;
+	private int eventTime;
 	@NotNull
 	private int duration;
 	@NotNull

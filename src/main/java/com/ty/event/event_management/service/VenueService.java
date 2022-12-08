@@ -26,11 +26,10 @@ public class VenueService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<Venue>> updateVenue(Venue venue, int id) {
+	public ResponseEntity<ResponseStructure<Venue>> updateVenue(Venue venue) {
 		ResponseStructure<Venue> responseStructure = new ResponseStructure<Venue>();
-		Optional<Venue> optional = dao.getVenueById(id);
+		Optional<Venue> optional = dao.getVenueById(venue.getVenueid());
 		if (optional.isPresent()) {
-			optional.get();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data Updated");
 			responseStructure.setData(dao.updateVenue(venue));

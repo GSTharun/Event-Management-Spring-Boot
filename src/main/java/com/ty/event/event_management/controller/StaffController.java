@@ -29,8 +29,8 @@ public class StaffController {
 	}
 
 	@PutMapping
-	ResponseEntity<ResponseStructure<Staff>> updateStaff(@RequestBody Staff staff, @RequestParam int id) {
-		return staffService.updateStaff(staff, id);
+	ResponseEntity<ResponseStructure<Staff>> updateStaff(@RequestBody Staff staff) {
+		return staffService.updateStaff(staff);
 	}
 
 	@GetMapping

@@ -30,8 +30,8 @@ public class AgentController {
 	}
 
 	@PutMapping
-	ResponseEntity<ResponseStructure<Agent>> updateAgent(@RequestBody Agent agent, @RequestParam int id) {
-		return agentService.updateAgent(agent, id);
+	ResponseEntity<ResponseStructure<Agent>> updateAgent(@RequestBody Agent agent) {
+		return agentService.updateAgent(agent);
 	}
 
 	@GetMapping

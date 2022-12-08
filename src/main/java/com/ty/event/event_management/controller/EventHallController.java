@@ -29,9 +29,8 @@ public class EventHallController {
 	}
 
 	@PutMapping
-	public ResponseEntity<ResponseStructure<EventHall>> updateEventHall(@RequestBody EventHall eventHall,
-			@RequestParam int id) {
-		return service.updateEventHall(eventHall, id);
+	public ResponseEntity<ResponseStructure<EventHall>> updateEventHall(@RequestBody EventHall eventHall) {
+		return service.updateEventHall(eventHall);
 	}
 
 	@GetMapping

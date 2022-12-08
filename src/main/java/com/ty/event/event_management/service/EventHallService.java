@@ -26,11 +26,10 @@ public class EventHallService {
 		return new ResponseEntity<ResponseStructure<EventHall>>(responseStructure, HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<ResponseStructure<EventHall>> updateEventHall(EventHall eventHall, int id) {
+	public ResponseEntity<ResponseStructure<EventHall>> updateEventHall(EventHall eventHall) {
 		ResponseStructure<EventHall> responseStructure = new ResponseStructure<EventHall>();
-		Optional<EventHall> optional = dao.getEventHallById(id);
+		Optional<EventHall> optional = dao.getEventHallById(eventHall.getEventhallid());
 		if (optional.isPresent()) {
-			optional.get();
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data Updated");
 			responseStructure.setData(dao.updateEventHall(eventHall));

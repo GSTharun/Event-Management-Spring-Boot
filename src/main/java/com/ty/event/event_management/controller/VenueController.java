@@ -29,8 +29,8 @@ public class VenueController {
 	}
 
 	@PutMapping
-	public ResponseEntity<ResponseStructure<Venue>> updateVenue(@RequestBody Venue venue, @RequestParam int id) {
-		return service.updateVenue(venue, id);
+	public ResponseEntity<ResponseStructure<Venue>> updateVenue(@RequestBody Venue venue) {
+		return service.updateVenue(venue);
 	}
 
 	@GetMapping

@@ -29,9 +29,8 @@ public class AddressController {
 	}
 
 	@PutMapping
-	public ResponseEntity<ResponseStructure<Address>> updateAddress(@RequestBody Address address,
-			@RequestParam int id) {
-		return service.updateAddress(address, id);
+	public ResponseEntity<ResponseStructure<Address>> updateAddress(@RequestBody Address address) {
+		return service.updateAddress(address);
 	}
 
 	@GetMapping

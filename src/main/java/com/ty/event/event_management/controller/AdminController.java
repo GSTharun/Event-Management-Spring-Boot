@@ -30,8 +30,8 @@ public class AdminController {
 	}
 
 	@PutMapping
-	ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin, @RequestParam int id) {
-		return adminService.updateAdmin(admin, id);
+	ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin) {
+		return adminService.updateAdmin(admin);
 	}
 
 	@GetMapping
