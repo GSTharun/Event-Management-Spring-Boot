@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.ty.event.event_management.dao.UserDao;
 import com.ty.event.event_management.dto.User;
+import com.ty.event.event_management.exception.NoSuchIdFoundException;
+import com.ty.event.event_management.exception.UnableToUpdateException;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -38,7 +40,7 @@ public class UserService {
 			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
 
 		}
-		throw null;
+		throw new UnableToUpdateException("No Such Id Found To Update");
 	}
 
 	public ResponseEntity<ResponseStructure<User>> getUserById(int id) {
@@ -53,7 +55,7 @@ public class UserService {
 			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
 
 		}
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found");
 	}
 
 	public ResponseEntity<ResponseStructure<User>> deleteUserById(int id) {
@@ -69,7 +71,7 @@ public class UserService {
 			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
 		}
 
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found To Delete");
 	}
 
 }

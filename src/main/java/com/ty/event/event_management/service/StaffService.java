@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.ty.event.event_management.dao.StaffDao;
 import com.ty.event.event_management.dto.Staff;
+import com.ty.event.event_management.exception.NoSuchIdFoundException;
+import com.ty.event.event_management.exception.UnableToUpdateException;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -33,14 +35,14 @@ public class StaffService {
 		ResponseStructure<Staff> responseStructure = new ResponseStructure<Staff>();
 		Optional<Staff> optional = staffdao.getStaffById(staff.getStaffid());
 		if (optional.isPresent()) {
-			   staffdao.deleteStaff(optional.get());
+			   staffdao.updateStaff(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(staffdao.saveStaff(staff));
 			return new ResponseEntity<ResponseStructure<Staff>>(responseStructure, HttpStatus.OK);
 
 		}
-		throw null;
+		throw new UnableToUpdateException("No Such Id Found To Update");
 	}
 
 	public ResponseEntity<ResponseStructure<Staff>> getStaffById(int id) {
@@ -55,7 +57,7 @@ public class StaffService {
 			return new ResponseEntity<ResponseStructure<Staff>>(responseStructure, HttpStatus.OK);
 
 		}
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found");
 	}
 
 	public ResponseEntity<ResponseStructure<Staff>> deleteStaffById(int id) {
@@ -71,7 +73,7 @@ public class StaffService {
 			return new ResponseEntity<ResponseStructure<Staff>>(responseStructure, HttpStatus.OK);
 		}
 
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found To Delete");
 	}
 
 }
