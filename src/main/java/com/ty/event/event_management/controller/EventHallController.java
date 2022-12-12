@@ -1,6 +1,7 @@
 package com.ty.event.event_management.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,10 @@ import com.ty.event.event_management.dto.EventHall;
 import com.ty.event.event_management.service.EventHallService;
 import com.ty.event.event_management.util.ResponseStructure;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("eventhall")
 public class EventHallController {
@@ -23,22 +28,47 @@ public class EventHallController {
 	@Autowired
 	private EventHallService service;
 
-	@PostMapping
+	@ApiOperation(value = "saveEventHall", notes = "it is used to save the eventhall")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
+			@ApiResponse(code = 500, message = "internal server error"),
+			@ApiResponse(code = 404, message = "Not Found") })
+
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+
 	public ResponseEntity<ResponseStructure<EventHall>> saveEventHall(@RequestBody EventHall eventHall) {
 		return service.saveEventHall(eventHall);
 	}
 
-	@PutMapping
+	@ApiOperation(value = "updateEventHall", notes = "it is used to update the eventhall")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
+			@ApiResponse(code = 500, message = "internal server error"),
+			@ApiResponse(code = 404, message = "Not Found") })
+
+	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+
 	public ResponseEntity<ResponseStructure<EventHall>> updateEventHall(@RequestBody EventHall eventHall) {
 		return service.updateEventHall(eventHall);
 	}
 
-	@GetMapping
+	@ApiOperation(value = "getEventHallById", notes = "it is used to get the EventHall by id")
+	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
+			@ApiResponse(code = 500, message = "internal server error"),
+			@ApiResponse(code = 404, message = "Not Found") })
+
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
+
 	public ResponseEntity<ResponseStructure<EventHall>> getEventHallById(@RequestParam int id) {
 		return service.getEventHallById(id);
 	}
 
-	@DeleteMapping("/{id}")
+	@ApiOperation(value = "deleteEventHall", notes = "it is used to delete the eventhall by id")
+	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
+			@ApiResponse(code = 500, message = "internel server error"),
+			@ApiResponse(code = 404, message = "Not Found") })
+
+	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<EventHall>> deleteEventHallById(@PathVariable int id) {
 		return service.deleteEventHallById(id);
 	}

@@ -1,5 +1,9 @@
 package com.ty.event.event_management.util;
 
+import java.util.Optional;
+
+import com.ty.event.event_management.dto.User;
+
 import lombok.Getter;
 import lombok.Setter;
 
