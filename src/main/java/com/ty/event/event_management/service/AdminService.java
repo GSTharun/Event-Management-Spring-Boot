@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.ty.event.event_management.dao.AdminDao;
 import com.ty.event.event_management.dto.Admin;
+import com.ty.event.event_management.exception.NoSuchIdFoundException;
+import com.ty.event.event_management.exception.UnableToUpdateException;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -32,12 +34,13 @@ public class AdminService {
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		Optional<Admin> optional = adminDao.getAdminById(admin.getAdminid());
 		if (optional.isPresent()) {
+			
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(adminDao.saveAdmin(admin));
 			return new ResponseEntity<ResponseStructure<Admin>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new UnableToUpdateException("No Such ID Found To Update");
 
 	}
 
@@ -51,7 +54,7 @@ public class AdminService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Admin>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found");
 	}
 
 	public ResponseEntity<ResponseStructure<Admin>> deleteAdminById(int id) {
@@ -65,7 +68,7 @@ public class AdminService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Admin>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new NoSuchIdFoundException("No Such ID Found To Delete");
 	}
 
 }

@@ -1,8 +1,8 @@
 package com.ty.event.event_management.util;
 
-import java.util.Optional;
 
-import com.ty.event.event_management.dto.User;
+import org.springframework.http.HttpStatus;
+
 
 import lombok.Getter;
 import lombok.Setter;
