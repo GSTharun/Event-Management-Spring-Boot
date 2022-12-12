@@ -23,6 +23,6 @@ public class Address {
 	@NotNull
 	private String location;
 	
-	@OneToOne(mappedBy = "address")
+	@OneToOne
 	private EventHall eventHall;
 }
