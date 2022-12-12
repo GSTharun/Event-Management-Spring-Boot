@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.ty.event.event_management.dao.EventHallDao;
 import com.ty.event.event_management.dto.EventHall;
-
+import com.ty.event.event_management.exception.NoSuchIdFoundException;
+import com.ty.event.event_management.exception.UnableToUpdateException;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -35,7 +36,7 @@ public class EventHallService {
 			responseStructure.setData(dao.updateEventHall(eventHall));
 			return new ResponseEntity<ResponseStructure<EventHall>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new UnableToUpdateException("No Such Id Found To Update");
 
 	}
 
@@ -48,7 +49,7 @@ public class EventHallService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<EventHall>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found");
 
 	}
 
@@ -62,7 +63,7 @@ public class EventHallService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<EventHall>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new NoSuchIdFoundException("NO Such Id Found To Update");
 	}
 
 }

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.ty.event.event_management.dao.AgentDao;
 import com.ty.event.event_management.dto.Agent;
+import com.ty.event.event_management.exception.NoSuchIdFoundException;
+import com.ty.event.event_management.exception.UnableToUpdateException;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -37,7 +39,7 @@ public class AgentService {
 			responseStructure.setData(agentdao.saveAgent(agent));
 			return new ResponseEntity<ResponseStructure<Agent>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new UnableToUpdateException("No Such Id Found To Update");
 	}
 
 	public ResponseEntity<ResponseStructure<Agent>> getAgentById(int id) {
@@ -50,7 +52,7 @@ public class AgentService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Agent>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found");
 	}
 
 	public ResponseEntity<ResponseStructure<Agent>> deleteAgentById(int id) {
@@ -65,7 +67,7 @@ public class AgentService {
 			return new ResponseEntity<ResponseStructure<Agent>>(responseStructure, HttpStatus.OK);
 		}
 
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found To Delete");
 
 	}
 
