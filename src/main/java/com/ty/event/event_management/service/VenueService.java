@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.ty.event.event_management.dao.VenueDao;
 import com.ty.event.event_management.dto.Venue;
+import com.ty.event.event_management.exception.NoSuchIdFoundException;
+import com.ty.event.event_management.exception.UnableToUpdateException;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -35,7 +37,7 @@ public class VenueService {
 			responseStructure.setData(dao.updateVenue(venue));
 			return new ResponseEntity<ResponseStructure<Venue>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new UnableToUpdateException("No Such Id Found To Update");
 
 	}
 
@@ -48,7 +50,7 @@ public class VenueService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Venue>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found");
 
 	}
 
@@ -62,7 +64,7 @@ public class VenueService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Venue>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found To Delete");
 
 	}
 

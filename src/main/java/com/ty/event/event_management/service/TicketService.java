@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.ty.event.event_management.dao.TicketDao;
 import com.ty.event.event_management.dto.Ticket;
+import com.ty.event.event_management.exception.NoSuchIdFoundException;
+import com.ty.event.event_management.exception.UnableToUpdateException;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -36,7 +38,7 @@ public class TicketService {
 			return new ResponseEntity<ResponseStructure<Ticket>>(responseStructure, HttpStatus.OK);
 		}
 
-		throw null;
+		throw new UnableToUpdateException("No Such Id Found To Update");
 
 	}
 
@@ -49,7 +51,7 @@ public class TicketService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Ticket>>(responseStructure, HttpStatus.OK);
 		}
-			throw null;
+			throw new NoSuchIdFoundException("No Such Id Found");
 
 	}
 
@@ -63,7 +65,7 @@ public class TicketService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Ticket>>(responseStructure, HttpStatus.OK);
 		}
-			throw null;
+			throw new NoSuchIdFoundException("No Such Found To Delete");
 		
 
 	}

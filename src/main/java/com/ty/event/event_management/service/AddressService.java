@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.ty.event.event_management.dao.AddressDao;
 import com.ty.event.event_management.dto.Address;
+import com.ty.event.event_management.exception.NoSuchIdFoundException;
+import com.ty.event.event_management.exception.UnableToUpdateException;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -34,7 +36,7 @@ public class AddressService {
 			responseStructure.setData(dao.updateAddress(address));
 			return new ResponseEntity<ResponseStructure<Address>>(responseStructure, HttpStatus.OK);
 		}
-		throw null;
+		throw new UnableToUpdateException("No Such Id Found To Update");
 	}
 
 	public ResponseEntity<ResponseStructure<Address>> getAddressById(int id) {
@@ -47,7 +49,7 @@ public class AddressService {
 			return new ResponseEntity<ResponseStructure<Address>>(responseStructure, HttpStatus.OK);
 
 		}
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found");
 	}
 
 	public ResponseEntity<ResponseStructure<Address>> deleteAddressById(int id) {
@@ -61,6 +63,6 @@ public class AddressService {
 			return new ResponseEntity<ResponseStructure<Address>>(responseStructure, HttpStatus.OK);
 
 		}
-		throw null;
+		throw new NoSuchIdFoundException("No Such Id Found To Delete");
 	}
 }
