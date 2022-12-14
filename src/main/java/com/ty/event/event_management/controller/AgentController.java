@@ -48,8 +48,8 @@ public class AgentController {
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	ResponseEntity<ResponseStructure<Agent>> updateAgent(@RequestBody Agent agent) {
-		return agentService.updateAgent(agent);
+	ResponseEntity<ResponseStructure<Agent>> updateAgent(@RequestBody Agent agent,@RequestParam int id) {
+		return agentService.updateAgent(agent,id);
 	}
 
 	@ApiOperation(value = "getAgentById", notes = "it is used to get the Agent by id")

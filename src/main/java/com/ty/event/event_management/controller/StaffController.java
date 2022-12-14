@@ -49,8 +49,8 @@ public class StaffController {
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	
-	ResponseEntity<ResponseStructure<Staff>> updateStaff(@RequestBody Staff staff) {
-		return staffService.updateStaff(staff);
+	ResponseEntity<ResponseStructure<Staff>> updateStaff(@RequestBody Staff staff,@RequestParam int id) {
+		return staffService.updateStaff(staff,id);
 	}
 
 	@ApiOperation(value = "getStaffById", notes = "it is used to get the staff by id")

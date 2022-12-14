@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.ty.event.event_management.dao.EventDetailsDao;
 import com.ty.event.event_management.dao.VenueDao;
+import com.ty.event.event_management.dto.EventDetails;
 import com.ty.event.event_management.dto.Venue;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
 import com.ty.event.event_management.exception.UnableToUpdateException;
@@ -19,19 +21,37 @@ public class VenueService {
 	@Autowired
 	private VenueDao dao;
 
-	public ResponseEntity<ResponseStructure<Venue>> saveVenue(Venue venue) {
+	@Autowired
+	private EventDetailsDao dao2;
+
+	public ResponseEntity<ResponseStructure<Venue>> saveVenue(Venue venue, int id) {
 		ResponseStructure<Venue> responseStructure = new ResponseStructure<Venue>();
-		responseStructure.setStatus(HttpStatus.CREATED.value());
-		responseStructure.setMessage("Data Saved");
-		responseStructure.setData(dao.saveVenue(venue));
+		Optional<EventDetails> optional = dao2.getEventDetailsById(id);
+		EventDetails details;
+		if (optional.isPresent()) {
+			details = optional.get();
+		} else {
+			details = null;
+		}
+		if (details != null) {
+			venue.setEventDetail(details);
+			responseStructure.setStatus(HttpStatus.CREATED.value());
+			responseStructure.setMessage("Data Saved");
+			responseStructure.setData(dao.saveVenue(venue));
+			details.getEventId();
+			dao2.updateEventDetails(details);
+		}else {
+			throw new NoSuchIdFoundException();
+		}
 		return new ResponseEntity<ResponseStructure<Venue>>(responseStructure, HttpStatus.CREATED);
 
 	}
 
-	public ResponseEntity<ResponseStructure<Venue>> updateVenue(Venue venue) {
+	public ResponseEntity<ResponseStructure<Venue>> updateVenue(Venue venue, int id) {
 		ResponseStructure<Venue> responseStructure = new ResponseStructure<Venue>();
-		Optional<Venue> optional = dao.getVenueById(venue.getVenueid());
+		Optional<Venue> optional = dao.getVenueById(id);
 		if (optional.isPresent()) {
+			venue.setVenueid(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data Updated");
 			responseStructure.setData(dao.updateVenue(venue));

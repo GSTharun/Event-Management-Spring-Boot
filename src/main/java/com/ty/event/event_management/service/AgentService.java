@@ -29,11 +29,12 @@ public class AgentService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<Agent>> updateAgent(Agent agent) {
+	public ResponseEntity<ResponseStructure<Agent>> updateAgent(Agent agent,int id) {
 		ResponseEntity<ResponseStructure<Agent>> responseEntity;
 		ResponseStructure<Agent> responseStructure = new ResponseStructure<Agent>();
-		Optional<Agent> optional = agentdao.getAgentById(agent.getAgentid());
+		Optional<Agent> optional = agentdao.getAgentById(id);
 		if (optional.isPresent()) {
+			agent.setAgentid(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(agentdao.saveAgent(agent));

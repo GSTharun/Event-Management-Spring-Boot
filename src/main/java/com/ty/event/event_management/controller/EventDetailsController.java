@@ -39,8 +39,8 @@ public class EventDetailsController {
 
 	
 	
-	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetails(@RequestBody EventDetails eventDetails){
-		return evService.saveEventDetails(eventDetails);
+	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetails(@RequestBody EventDetails eventDetails,@RequestParam int id){
+		return evService.saveEventDetails(eventDetails,id);
 	}
 
 	@ApiOperation(value = "updateEventDetails", notes = "it is used to update the EventDetails")
@@ -53,8 +53,8 @@ public class EventDetailsController {
 	
 
 	
-	public ResponseEntity<ResponseStructure<EventDetails>> updateEventDetails(@RequestBody EventDetails eventDetails){
-		return evService.updateEventDetailsById(eventDetails);
+	public ResponseEntity<ResponseStructure<EventDetails>> updateEventDetails(@RequestBody EventDetails eventDetails,@RequestParam int id){
+		return evService.updateEventDetailsById(eventDetails,id);
 	}
 
 	@ApiOperation(value = "getEventDetailsById", notes = "it is used to get the eventdetails by id")

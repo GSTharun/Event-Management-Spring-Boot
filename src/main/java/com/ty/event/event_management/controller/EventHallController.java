@@ -33,11 +33,11 @@ public class EventHallController {
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
 
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
+	@PostMapping(produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	public ResponseEntity<ResponseStructure<EventHall>> saveEventHall(@RequestBody EventHall eventHall) {
-		return service.saveEventHall(eventHall);
+	public ResponseEntity<ResponseStructure<EventHall>> saveEventHall(@RequestParam int aid,@RequestParam int edid,@RequestParam int ehid) {
+		return service.saveEventHall(aid,edid,ehid);
 	}
 
 	@ApiOperation(value = "updateEventHall", notes = "it is used to update the eventhall")
@@ -48,8 +48,8 @@ public class EventHallController {
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	public ResponseEntity<ResponseStructure<EventHall>> updateEventHall(@RequestBody EventHall eventHall) {
-		return service.updateEventHall(eventHall);
+	public ResponseEntity<ResponseStructure<EventHall>> updateEventHall(@RequestBody EventHall eventHall,@RequestParam int id) {
+		return service.updateEventHall(eventHall,id);
 	}
 
 	@ApiOperation(value = "getEventHallById", notes = "it is used to get the EventHall by id")

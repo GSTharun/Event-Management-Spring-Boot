@@ -20,17 +20,14 @@ public class Agent {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int agentid;
-	@NotNull 
-private String agentname;
 	@NotNull
-private String agentemail;
+	private String agentname;
 	@NotNull
-private long phone;
-	
-	@OneToMany(mappedBy = "agent")
-	private List<EventDetails>details ;
-	
+	private String agentemail;
+	@NotNull
+	private long phone;
+
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Staff>staffs;
-	
+	private List<Staff> staffs;
+
 }
