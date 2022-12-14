@@ -29,12 +29,12 @@ public class AdminService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(Admin admin) {
+	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(Admin admin,int id) {
 		ResponseEntity<ResponseStructure<Admin>> responseEntity;
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
-		Optional<Admin> optional = adminDao.getAdminById(admin.getAdminid());
+		Optional<Admin> optional = adminDao.getAdminById(id);
 		if (optional.isPresent()) {
-			
+			admin.setAdminid(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(adminDao.saveAdmin(admin));

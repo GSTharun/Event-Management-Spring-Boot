@@ -48,8 +48,8 @@ public class AddressController {
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	public ResponseEntity<ResponseStructure<Address>> updateAddress(@RequestBody Address address) {
-		return service.updateAddress(address);
+	public ResponseEntity<ResponseStructure<Address>> updateAddress(@RequestBody Address address,@RequestParam int id) {
+		return service.updateAddress(address,id);
 	}
 
 	@ApiOperation(value = "getAddressById", notes = "it is used to get the Address by id")
@@ -75,3 +75,4 @@ public class AddressController {
 	}
 
 }
+

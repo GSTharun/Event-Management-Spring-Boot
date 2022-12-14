@@ -48,8 +48,8 @@ public class AdminController {
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin) {
-		return adminService.updateAdmin(admin);
+	ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin,@RequestParam int id) {
+		return adminService.updateAdmin(admin,id);
 	}
 
 	@ApiOperation(value = "getAdminById", notes = "it is used to get the Admin by id")

@@ -22,7 +22,5 @@ public class Address {
 	private String name;
 	@NotNull
 	private String location;
-	
-	@OneToOne
-	private EventHall eventHall;
+
 }

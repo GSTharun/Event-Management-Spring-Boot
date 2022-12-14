@@ -19,7 +19,6 @@ public class Ticket {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ticketid;
 
-	@OneToOne
-	private Venue venue;
+	
 
 }

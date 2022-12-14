@@ -36,8 +36,8 @@ public class VenueController {
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	public ResponseEntity<ResponseStructure<Venue>> saveVenue(@RequestBody Venue venue) {
-		return service.saveVenue(venue);
+	public ResponseEntity<ResponseStructure<Venue>> saveVenue(@RequestBody Venue venue,@RequestParam int id) {
+		return service.saveVenue(venue,id);
 	}
 
 	@ApiOperation(value = "updateVenu", notes = "it is used to update the venu")
@@ -48,8 +48,8 @@ public class VenueController {
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	public ResponseEntity<ResponseStructure<Venue>> updateVenue(@RequestBody Venue venue) {
-		return service.updateVenue(venue);
+	public ResponseEntity<ResponseStructure<Venue>> updateVenue(@RequestBody Venue venue,@RequestParam int id) {
+		return service.updateVenue(venue,id);
 	}
 
 	@ApiOperation(value = "getVenuById", notes = "it is used to get the venu by id")

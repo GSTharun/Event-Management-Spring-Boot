@@ -1,5 +1,6 @@
 package com.ty.event.event_management.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class Venue {
 
 	@OneToOne
 	private EventDetails eventDetail;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Ticket ticket;
 
 }

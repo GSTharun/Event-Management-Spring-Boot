@@ -1,7 +1,5 @@
 package com.ty.event.event_management.dto;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
@@ -12,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,9 +29,8 @@ public class EventDetails {
 	@NotNull
 	private String address;
 	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime eventDate;
-	@NotNull
-	private int eventTime;
 	@NotNull
 	private int duration;
 	@NotNull
@@ -40,9 +39,6 @@ public class EventDetails {
 	private String equipment;
 	@NotNull
 	private String entertainment;
-
-	@ManyToOne
-	private User user;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Agent agent;

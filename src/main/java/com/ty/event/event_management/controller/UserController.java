@@ -46,8 +46,8 @@ public class UserController {
 
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User user) {
-		return userService.updateUser(user);
+	ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User user,@RequestParam int id) {
+		return userService.updateUser(user,id);
 	}
 
 	@ApiOperation(value = "getUserById", notes = "it is used to get the user by id")

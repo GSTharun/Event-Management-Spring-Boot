@@ -49,9 +49,9 @@ public class TicketControlller {
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	public ResponseEntity<ResponseStructure<Ticket>> updateTicket(@RequestBody Ticket ticket) {
+	public ResponseEntity<ResponseStructure<Ticket>> updateTicket(@RequestBody Ticket ticket,@RequestParam int id) {
 
-		return ticketService.updateTicketById(ticket);
+		return ticketService.updateTicketById(ticket,id);
 	}
 
 	@ApiOperation(value = "getTicketById", notes = "it is used to get the ticket by id")
