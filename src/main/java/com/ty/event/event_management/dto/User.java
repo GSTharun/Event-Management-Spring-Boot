@@ -3,12 +3,15 @@ package com.ty.event.event_management.dto;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import com.ty.event.event_management.util.AESencription;
 
 import lombok.Data;
 import lombok.Getter;
@@ -29,6 +32,7 @@ public class User {
 	private long phoneno;
 	@NotNull
 	private String email;
+	@Convert(converter = AESencription.class)
 	@NotNull
 	private String password;
 	@NotNull
