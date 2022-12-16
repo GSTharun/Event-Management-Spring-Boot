@@ -14,7 +14,8 @@ import com.ty.event.event_management.dto.EventDetails;
 import com.ty.event.event_management.dto.EventHall;
 import com.ty.event.event_management.dto.User;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
-import com.ty.event.event_management.exception.UnableToUpdateException;
+import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
+import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -61,7 +62,7 @@ public class EventDetailsService {
 			responseStructure.setData(evDetailsDao.updateEventDetails(eventDetails));
 
 		} else {
-			throw new UnableToUpdateException("No Such Id Found To Update");
+			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
 		return responseEntity;
 	}
@@ -94,7 +95,8 @@ public class EventDetailsService {
 			responseStructure.setMessage("deleted");
 			responseStructure.setData(optional.get());
 			return responseEntity;
+		}else {
+		throw new NoSuchIdFoundToDelete("No Such Id Found To Delete");
 		}
-		throw new NoSuchIdFoundException("No Such Id Found To Delete");
 	}
 }

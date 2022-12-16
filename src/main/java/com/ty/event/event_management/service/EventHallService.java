@@ -15,7 +15,7 @@ import com.ty.event.event_management.dto.Admin;
 import com.ty.event.event_management.dto.EventDetails;
 import com.ty.event.event_management.dto.EventHall;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
-import com.ty.event.event_management.exception.UnableToUpdateException;
+import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -70,8 +70,9 @@ public class EventHallService {
 			responseStructure.setMessage("Data Updated");
 			responseStructure.setData(dao.updateEventHall(eventHall));
 			return new ResponseEntity<ResponseStructure<EventHall>>(responseStructure, HttpStatus.OK);
+		}else {
+			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
-		throw new UnableToUpdateException("No Such Id Found To Update");
 
 	}
 

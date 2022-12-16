@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ty.event.event_management.dao.UserDao;
 import com.ty.event.event_management.dto.User;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
-import com.ty.event.event_management.exception.UnableToUpdateException;
+import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -40,8 +40,9 @@ public class UserService {
 			responseStructure.setData(userDao.saveUser(user));
 			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
 
+		}else {
+			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
-		throw new UnableToUpdateException("No Such Id Found To Update");
 	}
 
 	public ResponseEntity<ResponseStructure<User>> getUserById(int id) {
@@ -53,10 +54,14 @@ public class UserService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data found");
 			responseStructure.setData(optional.get());
-			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
 
+		}else {
+			
+			throw new NoSuchIdFoundException();
 		}
-		throw new NoSuchIdFoundException("No Such Id Found");
+		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
+
+		
 	}
 
 	public ResponseEntity<ResponseStructure<User>> deleteUserById(int id) {
@@ -70,9 +75,10 @@ public class UserService {
 			responseStructure.setMessage("Deleted");
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
-		}
+		}else {
 
 		throw new NoSuchIdFoundException("No Such Id Found To Delete");
+		}
 	}
 
 }

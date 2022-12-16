@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 import com.ty.event.event_management.dao.AddressDao;
 import com.ty.event.event_management.dto.Address;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
-import com.ty.event.event_management.exception.UnableToUpdateException;
+import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
+import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -18,9 +19,9 @@ public class AddressService {
 
 	@Autowired
 	private AddressDao dao;
-	
+
 	public ResponseEntity<ResponseStructure<Address>> saveAddress(Address address) {
-		
+
 		ResponseStructure<Address> responseStructure = new ResponseStructure<Address>();
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Data Saved");
@@ -28,7 +29,7 @@ public class AddressService {
 		return new ResponseEntity<ResponseStructure<Address>>(responseStructure, HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<ResponseStructure<Address>> updateAddress(Address address,int id) {
+	public ResponseEntity<ResponseStructure<Address>> updateAddress(Address address, int id) {
 		ResponseStructure<Address> responseStructure = new ResponseStructure<Address>();
 		Optional<Address> optional = dao.getAddressById(id);
 		if (optional.isPresent()) {
@@ -37,8 +38,9 @@ public class AddressService {
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(dao.updateAddress(address));
 			return new ResponseEntity<ResponseStructure<Address>>(responseStructure, HttpStatus.OK);
+		} else {
+			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
-		throw new UnableToUpdateException("No Such Id Found To Update");
 	}
 
 	public ResponseEntity<ResponseStructure<Address>> getAddressById(int id) {
@@ -64,7 +66,8 @@ public class AddressService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Address>>(responseStructure, HttpStatus.OK);
 
+		}else {
+		throw new NoSuchIdFoundToDelete("No Such Id Found To Delete");
 		}
-		throw new NoSuchIdFoundException("No Such Id Found To Delete");
 	}
 }

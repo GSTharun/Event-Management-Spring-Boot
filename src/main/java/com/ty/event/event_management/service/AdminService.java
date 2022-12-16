@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 import com.ty.event.event_management.dao.AdminDao;
 import com.ty.event.event_management.dto.Admin;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
-import com.ty.event.event_management.exception.UnableToUpdateException;
+import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
+import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -29,7 +30,7 @@ public class AdminService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(Admin admin,int id) {
+	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(Admin admin, int id) {
 		ResponseEntity<ResponseStructure<Admin>> responseEntity;
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		Optional<Admin> optional = adminDao.getAdminById(id);
@@ -39,8 +40,9 @@ public class AdminService {
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(adminDao.saveAdmin(admin));
 			return new ResponseEntity<ResponseStructure<Admin>>(responseStructure, HttpStatus.OK);
+		} else {
+			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
-		throw new UnableToUpdateException("No Such ID Found To Update");
 
 	}
 
@@ -62,13 +64,14 @@ public class AdminService {
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		Optional<Admin> optional = adminDao.getAdminById(id);
 		if (optional.isPresent()) {
-            adminDao.deleteAdmin(optional.get());
+			adminDao.deleteAdmin(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Deleted");
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Admin>>(responseStructure, HttpStatus.OK);
+		} else {
+			throw new NoSuchIdFoundToDelete("No Such ID Found To Delete");
 		}
-		throw new NoSuchIdFoundException("No Such ID Found To Delete");
 	}
 
 }
