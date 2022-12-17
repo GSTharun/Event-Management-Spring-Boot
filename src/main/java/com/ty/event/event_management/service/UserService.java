@@ -11,6 +11,7 @@ import com.ty.event.event_management.dao.UserDao;
 import com.ty.event.event_management.dto.User;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
 import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
+import com.ty.event.event_management.util.AESencription;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -79,6 +80,16 @@ public class UserService {
 
 		throw new NoSuchIdFoundException("No Such Id Found To Delete");
 		}
+	}
+	
+	public String validateUserByEmailAndPassword(String email,String Password) {
+		User user=userDao.getUserByEmail(email);
+		AESencription dec=new AESencription();
+		System.out.println(user.getPassword());
+		if(Password.equals(user.getPassword())) {
+			return "Logged in succesfully";
+		}
+		return "Invalid password";
 	}
 
 }
