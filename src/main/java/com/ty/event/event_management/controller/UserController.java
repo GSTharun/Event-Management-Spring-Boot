@@ -69,16 +69,11 @@ public class UserController {
 	ResponseEntity<ResponseStructure<User>> deleteUserById(@PathVariable int id) {
 		return userService.deleteUserById(id);
 	}
-<<<<<<< HEAD
-	//	@GetMapping
-	//	public String validateUserByEmailAndPassword(@RequestParam String email,String password) {
-	//		return userService.validateUserByEmailAndPassword(email, password);
-	//	}
-=======
+
 //	@GetMapping
 //	public String validateUserByEmailAndPassword(@RequestParam String email,String password) {
 //		return userService.validateUserByEmailAndPassword(email, password);
 	}
->>>>>>> e762a131c120dfee176f5c322929552e5ad9b5d4
+
 
 

@@ -20,11 +20,9 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
-<<<<<<< HEAD
-	//public static final Logger logger=Logger.getLogger(UserService.class);
-=======
+
 	public static final Logger logger = Logger.getLogger(UserService.class);
->>>>>>> e762a131c120dfee176f5c322929552e5ad9b5d4
+
 
 	public ResponseEntity<ResponseStructure<User>> saveUser(User user) {
 		ResponseEntity<ResponseStructure<User>> responseEntity;
@@ -33,11 +31,8 @@ public class UserService {
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Data saved");
 		responseStructure.setData(userDao.saveUser(user));
-<<<<<<< HEAD
-		//logger.debug("User saved");
-=======
+
 		logger.debug("data Saved");
->>>>>>> e762a131c120dfee176f5c322929552e5ad9b5d4
 		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.CREATED);
 
 	}
