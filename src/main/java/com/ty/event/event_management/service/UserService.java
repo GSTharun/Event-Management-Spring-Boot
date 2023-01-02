@@ -2,6 +2,7 @@ package com.ty.event.event_management.service;
 
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import com.ty.event.event_management.util.ResponseStructure;
 public class UserService {
 	@Autowired
 	private UserDao userDao;
+	
+	public static final Logger logger = Logger.getLogger(UserService.class);
 
 	public ResponseEntity<ResponseStructure<User>> saveUser(User user) {
 		ResponseEntity<ResponseStructure<User>> responseEntity;
@@ -26,6 +29,7 @@ public class UserService {
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Data saved");
 		responseStructure.setData(userDao.saveUser(user));
+		logger.debug("data Saved");
 		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.CREATED);
 
 	}
@@ -39,6 +43,7 @@ public class UserService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(userDao.saveUser(user));
+			logger.info("data updated");
 			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
 
 		}else {
@@ -58,6 +63,7 @@ public class UserService {
 
 		}else {
 			
+			logger.fatal("data not found");
 			throw new NoSuchIdFoundException();
 		}
 		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
@@ -74,7 +80,7 @@ public class UserService {
 
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Deleted");
-			responseStructure.setData(optional.get());
+			logger.warn("data deleted");
 			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
 		}else {
 
@@ -89,7 +95,7 @@ public class UserService {
 		if(Password.equals(user.getPassword())) {
 			return "Logged in succesfully";
 		}
-		return "Invalid password";
+		return "invalid password";
 	}
 
 }

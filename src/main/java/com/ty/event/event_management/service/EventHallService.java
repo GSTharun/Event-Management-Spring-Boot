@@ -33,29 +33,23 @@ public class EventHallService {
 	public ResponseEntity<ResponseStructure<EventHall>> saveEventHall(int aid,int edid,int ehid) {
 		ResponseStructure<EventHall> responseStructure = new ResponseStructure<EventHall>();
 		responseStructure.setStatus(HttpStatus.CREATED.value());
-		Optional<EventDetails> optional= eventDetailsDao.getEventDetailsById(edid);
-		EventDetails details;
-		if(optional.isPresent()) {
-			details=optional.get();
-		}else {
-			details=null;
-		}
-		
-		Optional<Admin> optional2=adminDao.getAdminById(aid);
-		Admin admin;
-		if(optional2.isPresent()) {
-			admin=optional2.get();
-		}else {
-			admin=null;
-		}
-		
-		if(details!=null && admin!=null) {
+		Optional<EventDetails> event= eventDetailsDao.getEventDetailsById(edid);
+		Optional<Admin> admin=adminDao.getAdminById(aid);
+		Optional<EventHall> eventHall = dao.getEventHallById(ehid);
+		/*if(event.isPresent()&&admin.isPresent()&& eventHall.isPresent()) {
 			
-		details.setEvHall(admin.getEventHalls().get(ehid-1));
+			event.get().setEvHall(admin.get().getEventHalls().get(ehid-1));
 		responseStructure.setMessage("Data Saved");
-		responseStructure.setData(dao.saveEventHall(admin.getEventHalls().get(ehid-1)));
+		responseStructure.setData(dao.saveEventHall(admin.get().getEventHalls().get()));
 //		eventDetailsDao.updateEventDetails(details);
-		}else {
+		}*/
+		if (event.isPresent()&&admin.isPresent()&& eventHall.isPresent()) {
+			event.get().setEvHall(eventHall.get());	
+			responseStructure.setMessage("Data Saved");
+			responseStructure.setData(eventHall.get());
+			eventDetailsDao.updateEventDetails(event.get());
+		}
+		else {
 			throw new NoSuchIdFoundException();
 		}
 		return new ResponseEntity<ResponseStructure<EventHall>>(responseStructure, HttpStatus.CREATED);
