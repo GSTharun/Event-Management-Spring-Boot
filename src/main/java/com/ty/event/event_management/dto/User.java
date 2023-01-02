@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import com.ty.event.event_management.util.AESencription;
@@ -30,7 +31,7 @@ public class User {
 	private String address;
 	@NotNull
 	private long phoneno;
-	@NotNull
+	@Email
 	private String email;
 	@Convert(converter = AESencription.class)
 	@NotNull

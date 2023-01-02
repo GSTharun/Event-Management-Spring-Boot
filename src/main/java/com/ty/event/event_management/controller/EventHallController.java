@@ -28,10 +28,10 @@ public class EventHallController {
 	@Autowired
 	private EventHallService service;
 
-	@ApiOperation(value = "saveEventHall", notes = "it is used to save the eventhall")
+	@ApiOperation(value = "saveEventHall", notes = "it is used to save the Eventhall")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found") ,@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method not allowed")})
 
 	@PostMapping(produces = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -43,7 +43,7 @@ public class EventHallController {
 	@ApiOperation(value = "updateEventHall", notes = "it is used to update the eventhall")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method not allowed") })
 
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -55,7 +55,7 @@ public class EventHallController {
 	@ApiOperation(value = "getEventHallById", notes = "it is used to get the EventHall by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found") ,@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method not allowed")})
 
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 
@@ -66,7 +66,7 @@ public class EventHallController {
 	@ApiOperation(value = "deleteEventHall", notes = "it is used to delete the eventhall by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internel server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found") ,@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method not allowed")})
 
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<EventHall>> deleteEventHallById(@PathVariable int id) {
