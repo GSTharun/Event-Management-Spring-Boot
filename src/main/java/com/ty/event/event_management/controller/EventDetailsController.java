@@ -75,6 +75,21 @@ public class EventDetailsController {
 	public ResponseEntity<ResponseStructure<EventDetails>> deleteEventDetailsById(@PathVariable int id){
 		return evService.deleteEventDetailsById(id);
 	}
+	
+	
+	@ApiOperation(value = "saveEventDetails", notes = "it is used to save the eventdetails")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
+			@ApiResponse(code = 500, message = "internal server error"),
+			@ApiResponse(code = 404, message = "Not Found") })
+
+
+
+	
+	@PostMapping("detials")
+	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetailsID(@RequestParam int edid,@RequestParam int ehid){
+		return evService.saveEventDetailsID(edid, ehid);
+		
+	}
 
 
 }
