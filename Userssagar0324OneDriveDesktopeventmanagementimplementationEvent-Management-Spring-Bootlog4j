@@ -1,0 +1,2 @@
+[2022-12-30 14:18:09,529] http-nio-8080-exec-1 com.ty.event.event_management.controller.UserController 61 INFO   - get info
+[2022-12-30 14:18:17,426] http-nio-8080-exec-3 com.ty.event.event_management.controller.UserController 61 INFO   - get info
