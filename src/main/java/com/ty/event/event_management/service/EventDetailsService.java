@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import com.ty.event.event_management.dao.EventDetailsDao;
 import com.ty.event.event_management.dao.EventHallDao;
 import com.ty.event.event_management.dao.UserDao;
+import com.ty.event.event_management.dto.Admin;
 import com.ty.event.event_management.dto.EventDetails;
 import com.ty.event.event_management.dto.EventHall;
 import com.ty.event.event_management.dto.User;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
-import com.ty.event.event_management.exception.UnableToUpdateException;
+import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
+import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -24,6 +26,9 @@ public class EventDetailsService {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private EventHallDao eventHallDao;
 
 	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetails(EventDetails eventDetails,int id) {
 		ResponseStructure<EventDetails> responseStructure = new ResponseStructure<EventDetails>();
@@ -61,7 +66,7 @@ public class EventDetailsService {
 			responseStructure.setData(evDetailsDao.updateEventDetails(eventDetails));
 
 		} else {
-			throw new UnableToUpdateException("No Such Id Found To Update");
+			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
 		return responseEntity;
 	}
@@ -94,7 +99,27 @@ public class EventDetailsService {
 			responseStructure.setMessage("deleted");
 			responseStructure.setData(optional.get());
 			return responseEntity;
+		}else {
+		throw new NoSuchIdFoundToDelete("No Such Id Found To Delete");
 		}
-		throw new NoSuchIdFoundException("No Such Id Found To Delete");
+	}
+	
+	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetailsID(int edid,int ehid) {
+		ResponseStructure<EventDetails> responseStructure = new ResponseStructure<EventDetails>();
+		responseStructure.setStatus(HttpStatus.CREATED.value());
+		Optional<EventDetails> event= evDetailsDao.getEventDetailsById(edid);
+		Optional<EventHall> eventHall = eventHallDao.getEventHallById(ehid);
+		
+		if (event.isPresent()&& eventHall.isPresent()) {
+			event.get().setEvHall(eventHall.get());
+			//eventHall.get().setEvDetails(event.get());
+			responseStructure.setMessage("Data Saved");
+			responseStructure.setData(event.get());
+			eventHallDao.updateEventHall(eventHall.get());
+		}
+		else {
+			throw new NoSuchIdFoundException();
+		}
+		return new ResponseEntity<ResponseStructure<EventDetails>>(responseStructure, HttpStatus.CREATED);
 	}
 }

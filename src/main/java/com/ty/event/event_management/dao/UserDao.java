@@ -30,5 +30,8 @@ public class UserDao {
 	public void deleteUser(User user) {
 		userRepository.delete(user);
 	}
+	public User getUserByEmail(String email) {
+		return userRepository.findUserByEmail(email);
+	}
 
 }

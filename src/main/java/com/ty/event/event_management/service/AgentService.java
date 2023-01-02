@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 import com.ty.event.event_management.dao.AgentDao;
 import com.ty.event.event_management.dto.Agent;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
-import com.ty.event.event_management.exception.UnableToUpdateException;
+import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
+import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -29,7 +30,7 @@ public class AgentService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<Agent>> updateAgent(Agent agent,int id) {
+	public ResponseEntity<ResponseStructure<Agent>> updateAgent(Agent agent, int id) {
 		ResponseEntity<ResponseStructure<Agent>> responseEntity;
 		ResponseStructure<Agent> responseStructure = new ResponseStructure<Agent>();
 		Optional<Agent> optional = agentdao.getAgentById(id);
@@ -39,8 +40,9 @@ public class AgentService {
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(agentdao.saveAgent(agent));
 			return new ResponseEntity<ResponseStructure<Agent>>(responseStructure, HttpStatus.OK);
+		} else {
+			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
-		throw new UnableToUpdateException("No Such Id Found To Update");
 	}
 
 	public ResponseEntity<ResponseStructure<Agent>> getAgentById(int id) {
@@ -52,8 +54,9 @@ public class AgentService {
 			responseStructure.setMessage("Data found");
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Agent>>(responseStructure, HttpStatus.OK);
+		} else {
+			throw new NoSuchIdFoundException("No Such Id Found");
 		}
-		throw new NoSuchIdFoundException("No Such Id Found");
 	}
 
 	public ResponseEntity<ResponseStructure<Agent>> deleteAgentById(int id) {
@@ -61,14 +64,15 @@ public class AgentService {
 		ResponseStructure<Agent> responseStructure = new ResponseStructure<Agent>();
 		Optional<Agent> optional = agentdao.getAgentById(id);
 		if (optional.isPresent()) {
-			   agentdao.deleteAgent(optional.get());
+			agentdao.deleteAgent(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Deleted");
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Agent>>(responseStructure, HttpStatus.OK);
-		}
+		} else {
 
-		throw new NoSuchIdFoundException("No Such Id Found To Delete");
+			throw new NoSuchIdFoundToDelete("No Such Id Found To Delete");
+		}
 
 	}
 

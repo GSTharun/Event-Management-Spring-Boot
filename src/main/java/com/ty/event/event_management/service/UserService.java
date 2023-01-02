@@ -12,7 +12,8 @@ import com.ty.event.event_management.controller.UserController;
 import com.ty.event.event_management.dao.UserDao;
 import com.ty.event.event_management.dto.User;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
-import com.ty.event.event_management.exception.UnableToUpdateException;
+import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
+import com.ty.event.event_management.util.AESencription;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -20,8 +21,12 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
+<<<<<<< HEAD
 	private static final Logger logger=Logger.getLogger(UserController.class);
 
+=======
+	public static final Logger logger = Logger.getLogger(UserService.class);
+>>>>>>> e762a131c120dfee176f5c322929552e5ad9b5d4
 
 	public ResponseEntity<ResponseStructure<User>> saveUser(User user) {
 		ResponseEntity<ResponseStructure<User>> responseEntity;
@@ -30,6 +35,7 @@ public class UserService {
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Data saved");
 		responseStructure.setData(userDao.saveUser(user));
+		logger.debug("data Saved");
 		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.CREATED);
 
 	}
@@ -43,10 +49,12 @@ public class UserService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(userDao.saveUser(user));
+			logger.info("data updated");
 			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
 
+		}else {
+			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
-		throw new UnableToUpdateException("No Such Id Found To Update");
 	}
 
 	public ResponseEntity<ResponseStructure<User>> getUserById(int id) {
@@ -58,11 +66,20 @@ public class UserService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data found");
 			responseStructure.setData(optional.get());
+<<<<<<< HEAD
 			logger.info("get info");
 			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
+=======
+>>>>>>> e762a131c120dfee176f5c322929552e5ad9b5d4
 
+		}else {
+			
+			logger.fatal("data not found");
+			throw new NoSuchIdFoundException();
 		}
-		throw new NoSuchIdFoundException("No Such Id Found");
+		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
+
+		
 	}
 
 	public ResponseEntity<ResponseStructure<User>> deleteUserById(int id) {
@@ -74,11 +91,22 @@ public class UserService {
 
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Deleted");
-			responseStructure.setData(optional.get());
+			logger.warn("data deleted");
 			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
-		}
+		}else {
 
 		throw new NoSuchIdFoundException("No Such Id Found To Delete");
+		}
+	}
+	
+	public String validateUserByEmailAndPassword(String email,String Password) {
+		User user=userDao.getUserByEmail(email);
+		AESencription dec=new AESencription();
+		System.out.println(user.getPassword());
+		if(Password.equals(user.getPassword())) {
+			return "Logged in succesfully";
+		}
+		return "invalid password";
 	}
 
 }

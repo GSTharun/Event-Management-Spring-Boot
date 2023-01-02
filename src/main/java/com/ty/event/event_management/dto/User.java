@@ -8,9 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+<<<<<<< HEAD
 import com.ty.event.event_management.util.AesEncryption;
+=======
+import com.ty.event.event_management.util.AESencription;
+>>>>>>> e762a131c120dfee176f5c322929552e5ad9b5d4
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,8 +33,9 @@ public class User {
 	private String address;
 	@NotNull
 	private long phoneno;
-	@NotNull
+	@Email
 	private String email;
+	@Convert(converter = AESencription.class)
 	@NotNull
 	@Convert(converter = AesEncryption.class)
 	private String password;

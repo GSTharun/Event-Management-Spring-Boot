@@ -12,7 +12,8 @@ import com.ty.event.event_management.dao.VenueDao;
 import com.ty.event.event_management.dto.Ticket;
 import com.ty.event.event_management.dto.Venue;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
-import com.ty.event.event_management.exception.UnableToUpdateException;
+import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
+import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
 @Service
@@ -42,9 +43,9 @@ public class TicketService {
 			responseStructure.setMessage("updated");
 			responseStructure.setData(ticketDao.updateTicket(ticket));
 			return new ResponseEntity<ResponseStructure<Ticket>>(responseStructure, HttpStatus.OK);
+		}else {
+			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
-
-		throw new UnableToUpdateException("No Such Id Found To Update");
 
 	}
 
@@ -56,8 +57,9 @@ public class TicketService {
 			responseStructure.setMessage("Data fetched");
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Ticket>>(responseStructure, HttpStatus.OK);
-		}
+		}else {
 			throw new NoSuchIdFoundException("No Such Id Found");
+		}
 
 	}
 
@@ -70,8 +72,9 @@ public class TicketService {
 			responseStructure.setMessage("Deleted sucessfully");
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Ticket>>(responseStructure, HttpStatus.OK);
+		}else {
+			throw new NoSuchIdFoundToDelete("No Such Found To Delete");
 		}
-			throw new NoSuchIdFoundException("No Such Found To Delete");
 		
 
 	}
