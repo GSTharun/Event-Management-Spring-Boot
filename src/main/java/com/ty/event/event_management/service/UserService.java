@@ -21,12 +21,10 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
-<<<<<<< HEAD
-	private static final Logger logger=Logger.getLogger(UserController.class);
 
-=======
+
+
 	public static final Logger logger = Logger.getLogger(UserService.class);
->>>>>>> e762a131c120dfee176f5c322929552e5ad9b5d4
 
 	public ResponseEntity<ResponseStructure<User>> saveUser(User user) {
 		ResponseEntity<ResponseStructure<User>> responseEntity;
@@ -66,11 +64,9 @@ public class UserService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data found");
 			responseStructure.setData(optional.get());
-<<<<<<< HEAD
+
 			logger.info("get info");
-			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
-=======
->>>>>>> e762a131c120dfee176f5c322929552e5ad9b5d4
+
 
 		}else {
 			
