@@ -31,7 +31,7 @@ public class EventHall {
 	private long phone;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn
+
 	List<EventDetails> evDetails;
 
 	@OneToOne(cascade = CascadeType.ALL)

@@ -2,7 +2,6 @@ package com.ty.event.event_management.dto;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +13,6 @@ import javax.validation.constraints.NotNull;
 
 import com.ty.event.event_management.util.AESencription;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
