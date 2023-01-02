@@ -2,7 +2,7 @@ package com.ty.event.event_management.dto;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import lombok.Data;
+import com.ty.event.event_management.util.AesEncryption;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,6 +31,7 @@ public class User {
 	@NotNull
 	private String email;
 	@NotNull
+	@Convert(converter = AesEncryption.class)
 	private String password;
 	@NotNull
 	private String gender;

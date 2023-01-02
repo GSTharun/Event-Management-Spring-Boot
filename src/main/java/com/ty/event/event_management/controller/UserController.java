@@ -1,5 +1,6 @@
 package com.ty.event.event_management.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import com.ty.event.event_management.dto.User;
 import com.ty.event.event_management.service.UserService;
 import com.ty.event.event_management.util.ResponseStructure;
 
+import ch.qos.logback.classic.BasicConfigurator;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -27,6 +29,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
 
 	@ApiOperation(value = "saveUser", notes = "it is used to save the user")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),

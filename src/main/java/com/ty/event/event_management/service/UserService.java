@@ -2,11 +2,13 @@ package com.ty.event.event_management.service;
 
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.ty.event.event_management.controller.UserController;
 import com.ty.event.event_management.dao.UserDao;
 import com.ty.event.event_management.dto.User;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
@@ -17,6 +19,9 @@ import com.ty.event.event_management.util.ResponseStructure;
 public class UserService {
 	@Autowired
 	private UserDao userDao;
+	
+	private static final Logger logger=Logger.getLogger(UserController.class);
+
 
 	public ResponseEntity<ResponseStructure<User>> saveUser(User user) {
 		ResponseEntity<ResponseStructure<User>> responseEntity;
@@ -53,6 +58,7 @@ public class UserService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data found");
 			responseStructure.setData(optional.get());
+			logger.info("get info");
 			return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
 
 		}
