@@ -8,12 +8,13 @@ import org.springframework.stereotype.Repository;
 import com.ty.event.event_management.dto.Agent;
 import com.ty.event.event_management.repository.AgentRepository;
 
+
 @Repository
 public class AgentDao {
-
+	
 	@Autowired
 	private AgentRepository agentRepository;
-
+	
 	public Agent saveAgent(Agent agent) {
 		return agentRepository.save(agent);
 	}

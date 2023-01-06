@@ -8,27 +8,30 @@ import org.springframework.stereotype.Repository;
 import com.ty.event.event_management.dto.Address;
 import com.ty.event.event_management.repository.AddressRepository;
 
+
+
+
 @Repository
 public class AddressDao {
-
+	
 	@Autowired
-	private AddressRepository repository;
-
+	private AddressRepository addressRepository;
+	
 	public Address saveAddress(Address address) {
-		return repository.save(address);
+		return addressRepository.save(address);
 	}
 
 	public Address updateAddress(Address address) {
-		return repository.save(address);
+		return addressRepository.save(address);
 	}
 
 	public Optional<Address> getAddressById(int id) {
-		 return repository.findById(id);
+		 return addressRepository.findById(id);
 		
 	}
 
 	public void deleteAddress(Address address) {
-		repository.delete(address);
+		addressRepository.delete(address);
 	}
 
 }

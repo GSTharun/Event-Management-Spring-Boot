@@ -27,16 +27,13 @@ public class StaffController {
 
 	@Autowired
 	private StaffService staffService;
-	
+
 	@ApiOperation(value = "saveStaff", notes = "it is used to save the staff")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-
-	
 	ResponseEntity<ResponseStructure<Staff>> saveStaff(@RequestBody Staff staff) {
 		return staffService.saveStaff(staff);
 	}
@@ -45,21 +42,17 @@ public class StaffController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	
-	ResponseEntity<ResponseStructure<Staff>> updateStaff(@RequestBody Staff staff,@RequestParam int id) {
-		return staffService.updateStaff(staff,id);
+	ResponseEntity<ResponseStructure<Staff>> updateStaff(@RequestBody Staff staff, @RequestParam int id) {
+		return staffService.updateStaff(staff, id);
 	}
 
 	@ApiOperation(value = "getStaffById", notes = "it is used to get the staff by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-
 	ResponseEntity<ResponseStructure<Staff>> getStaffById(@RequestParam int id) {
 		return staffService.getStaffById(id);
 	}
@@ -68,9 +61,7 @@ public class StaffController {
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-
 	ResponseEntity<ResponseStructure<Staff>> deleteStaffById(@PathVariable int id) {
 		return staffService.deleteStaffById(id);
 	}

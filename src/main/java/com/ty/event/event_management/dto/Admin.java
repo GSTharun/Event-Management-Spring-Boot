@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,18 +16,19 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Admin {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int adminid;
-	@NotNull
+	private int aid;
 	private String name;
-	@NotNull
 	private long phoneno;
-	@Email
-	private String email;
-	@NotNull
+	private String email; 
 	private String password;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<EventHall> eventHalls;
+	@OneToMany(cascade = CascadeType.PERSIST)
+	List<EventHalls> eventHalls;
+	
+	@OneToMany
+	List<Agent> agents;
+
 }

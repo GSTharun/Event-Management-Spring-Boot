@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("agent")
 public class AgentController {
-
+	
 	@Autowired
 	private AgentService agentService;
 
@@ -32,22 +32,18 @@ public class AgentController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-
-	ResponseEntity<ResponseStructure<Agent>> saveAgent(@RequestBody Agent agent) {
-		return agentService.saveAgent(agent);
+	ResponseEntity<ResponseStructure<Agent>> saveAgent(@RequestBody Agent agent,@RequestParam int aid,@RequestParam int ehid) {
+		return agentService.saveAgent(agent,aid,ehid);
 	}
 
 	@ApiOperation(value = "updateAgent", notes = "it is used to update the Agent")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-
 	ResponseEntity<ResponseStructure<Agent>> updateAgent(@RequestBody Agent agent,@RequestParam int id) {
 		return agentService.updateAgent(agent,id);
 	}
@@ -56,9 +52,7 @@ public class AgentController {
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-
 	ResponseEntity<ResponseStructure<Agent>> getAgentById(@RequestParam int id) {
 		return agentService.getAgentById(id);
 	}
@@ -67,11 +61,10 @@ public class AgentController {
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-
 	ResponseEntity<ResponseStructure<Agent>> deleteAgentById(@PathVariable int id) {
 		return agentService.deleteAgentById(id);
 	}
+
 
 }

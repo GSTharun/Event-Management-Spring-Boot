@@ -14,6 +14,7 @@ import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
 import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
+
 @Service
 public class StaffService {
 
@@ -31,19 +32,19 @@ public class StaffService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<Staff>> updateStaff(Staff staff,int id) {
+	public ResponseEntity<ResponseStructure<Staff>> updateStaff(Staff staff, int id) {
 		ResponseEntity<ResponseStructure<Staff>> responseEntity;
 		ResponseStructure<Staff> responseStructure = new ResponseStructure<Staff>();
 		Optional<Staff> optional = staffdao.getStaffById(id);
 		if (optional.isPresent()) {
 			staff.setStaffid(id);
-			   staffdao.updateStaff(optional.get());
+			staffdao.updateStaff(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(staffdao.saveStaff(staff));
 			return new ResponseEntity<ResponseStructure<Staff>>(responseStructure, HttpStatus.OK);
 
-		}else {
+		} else {
 			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
 	}
@@ -59,8 +60,8 @@ public class StaffService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Staff>>(responseStructure, HttpStatus.OK);
 
-		}else {
-		throw new NoSuchIdFoundException("No Such Id Found");
+		} else {
+			throw new NoSuchIdFoundException("No Such Id Found");
 		}
 	}
 
@@ -75,8 +76,8 @@ public class StaffService {
 			responseStructure.setMessage("Deleted");
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<Staff>>(responseStructure, HttpStatus.OK);
-		}else {
-		throw new NoSuchIdFoundToDelete("No Such Id Found To Delete");
+		} else {
+			throw new NoSuchIdFoundToDelete("No Such Id Found To Delete");
 		}
 	}
 

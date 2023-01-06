@@ -32,7 +32,6 @@ public class UserController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity<ResponseStructure<User>> saveUser(@RequestBody User user) {
@@ -43,18 +42,16 @@ public class UserController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User user,@RequestParam int id) {
-		return userService.updateUser(user,id);
+	ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User user, @RequestParam int id) {
+		return userService.updateUser(user, id);
 	}
 
 	@ApiOperation(value = "getUserById", notes = "it is used to get the user by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity<ResponseStructure<User>> getUserById(@RequestParam int id) {
 		return userService.getUserById(id);
@@ -64,14 +61,9 @@ public class UserController {
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity<ResponseStructure<User>> deleteUserById(@PathVariable int id) {
 		return userService.deleteUserById(id);
 	}
-//	@GetMapping
-//	public String validateUserByEmailAndPassword(@RequestParam String email,String password) {
-//		return userService.validateUserByEmailAndPassword(email, password);
-	}
 
-
+}

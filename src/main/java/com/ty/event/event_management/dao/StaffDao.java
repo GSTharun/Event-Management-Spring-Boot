@@ -8,11 +8,14 @@ import org.springframework.stereotype.Repository;
 import com.ty.event.event_management.dto.Staff;
 import com.ty.event.event_management.repository.StaffRepository;
 
+
+
 @Repository
 public class StaffDao {
+	
 	@Autowired
 	private StaffRepository staffRepository;
-
+	
 	public Staff saveStaff(Staff staff) {
 		return staffRepository.save(staff);
 	}
@@ -29,4 +32,5 @@ public class StaffDao {
 		staffRepository.delete(staff);
 
 	}
+
 }
