@@ -15,13 +15,16 @@ import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
 import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
+
+
+
 @Service
 public class AddressService {
-
-	@Autowired
-	private AddressDao dao;
 	
-	public static final Logger logger = Logger.getLogger(UserService.class);
+	@Autowired
+	private AddressDao addressDao;
+	
+	public static final Logger logger = Logger.getLogger(AddressService.class);
 
 	public ResponseEntity<ResponseStructure<Address>> saveAddress(Address address) {
 
@@ -29,18 +32,18 @@ public class AddressService {
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Data Saved");
 		logger.debug("data saved");		
-		responseStructure.setData(dao.saveAddress(address));
+		responseStructure.setData(addressDao.saveAddress(address));
 		return new ResponseEntity<ResponseStructure<Address>>(responseStructure, HttpStatus.CREATED);
 	}
 
 	public ResponseEntity<ResponseStructure<Address>> updateAddress(Address address, int id) {
 		ResponseStructure<Address> responseStructure = new ResponseStructure<Address>();
-		Optional<Address> optional = dao.getAddressById(id);
+		Optional<Address> optional = addressDao.getAddressById(id);
 		if (optional.isPresent()) {
 			address.setAddressid(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
-			responseStructure.setData(dao.updateAddress(address));
+			responseStructure.setData(addressDao.updateAddress(address));
 			logger.info("data updated");
 			return new ResponseEntity<ResponseStructure<Address>>(responseStructure, HttpStatus.OK);
 		} else {
@@ -50,7 +53,7 @@ public class AddressService {
 
 	public ResponseEntity<ResponseStructure<Address>> getAddressById(int id) {
 		ResponseStructure<Address> responseStructure = new ResponseStructure<Address>();
-		Optional<Address> optional = dao.getAddressById(id);
+		Optional<Address> optional = addressDao.getAddressById(id);
 		if (optional.isPresent()) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data Found");
@@ -63,9 +66,9 @@ public class AddressService {
 
 	public ResponseEntity<ResponseStructure<Address>> deleteAddressById(int id) {
 		ResponseStructure<Address> responseStructure = new ResponseStructure<Address>();
-		Optional<Address> optional = dao.getAddressById(id);
+		Optional<Address> optional = addressDao.getAddressById(id);
 		if (optional.isPresent()) {
-			dao.deleteAddress(optional.get());
+			addressDao.deleteAddress(optional.get());
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data Found");
 			responseStructure.setData(optional.get());
@@ -76,4 +79,5 @@ public class AddressService {
 		throw new NoSuchIdFoundToDelete("No Such Id Found To Delete");
 		}
 	}
+
 }

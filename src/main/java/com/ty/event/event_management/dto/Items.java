@@ -11,12 +11,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Staff {
-
+public class Items {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int staffid;
+	private int id;
 	private String name;
-	private long phoneno;
+	private String description;
+	private double cost;
+	private int quantity;
 
 }

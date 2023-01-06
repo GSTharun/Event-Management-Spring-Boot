@@ -8,24 +8,27 @@ import org.springframework.stereotype.Repository;
 import com.ty.event.event_management.dto.EventDetails;
 import com.ty.event.event_management.repository.EventDetailsRepository;
 
+
 @Repository
 public class EventDetailsDao {
+	
 	@Autowired
 	private EventDetailsRepository repository;
-
-	public EventDetails saveEventDetails(EventDetails eventDetails) {
+	
+	public EventDetails saveEvent(EventDetails eventDetails) {
 		return repository.save(eventDetails);
 	}
-
-	public EventDetails updateEventDetails(EventDetails eventDetails) {
+	
+	public EventDetails updateEvent(EventDetails eventDetails) {
 		return repository.save(eventDetails);
 	}
-
-	public Optional<EventDetails> getEventDetailsById(int id) {
+	
+	public Optional<EventDetails> getEventById(int id){
 		return repository.findById(id);
 	}
-
-	public void deleteEventDetails(EventDetails eventDetails) {
+	
+	public void deleteEvent(EventDetails eventDetails) {
 		repository.delete(eventDetails);
 	}
+
 }

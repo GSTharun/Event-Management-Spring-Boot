@@ -14,6 +14,8 @@ import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
 import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
+
+
 @Service
 public class AdminService {
 
@@ -35,7 +37,7 @@ public class AdminService {
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		Optional<Admin> optional = adminDao.getAdminById(id);
 		if (optional.isPresent()) {
-			admin.setAdminid(id);
+			admin.setAid(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(adminDao.saveAdmin(admin));

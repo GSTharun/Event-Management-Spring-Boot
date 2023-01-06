@@ -7,12 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.ty.event.event_management.dao.AdminDao;
 import com.ty.event.event_management.dao.AgentDao;
+import com.ty.event.event_management.dao.EventHallsDao;
+import com.ty.event.event_management.dto.Admin;
 import com.ty.event.event_management.dto.Agent;
+import com.ty.event.event_management.dto.EventHalls;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
 import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
 import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
+
+
 
 @Service
 public class AgentService {
@@ -20,12 +26,28 @@ public class AgentService {
 	@Autowired
 	private AgentDao agentdao;
 
-	public ResponseEntity<ResponseStructure<Agent>> saveAgent(Agent agent) {
+	@Autowired
+	private AdminDao adminDao;
+	
+	@Autowired
+	private EventHallsDao eventHallsDao;
+	
+	
+
+	public ResponseEntity<ResponseStructure<Agent>> saveAgent(Agent agent, int aid,int ehid) {
 		ResponseEntity<ResponseStructure<Agent>> responseEntity;
 		ResponseStructure<Agent> responseStructure = new ResponseStructure<Agent>();
-		responseStructure.setStatus(HttpStatus.CREATED.value());
-		responseStructure.setMessage("Data saved");
-		responseStructure.setData(agentdao.saveAgent(agent));
+		Optional<Admin> admin = adminDao.getAdminById(aid);
+		Optional<EventHalls> eventhall = eventHallsDao.getEventHallsById(ehid);
+		if (admin.isPresent() && eventhall.isPresent()) {
+			admin.get().getAgents().add(agent);
+			agent.setEventHalls(eventhall.get());
+			responseStructure.setStatus(HttpStatus.CREATED.value());
+			responseStructure.setMessage("Data saved");
+			responseStructure.setData(agentdao.saveAgent(agent));
+		} else {
+			throw new NoSuchIdFoundException();
+		}
 		return new ResponseEntity<ResponseStructure<Agent>>(responseStructure, HttpStatus.CREATED);
 
 	}
