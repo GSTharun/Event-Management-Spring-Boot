@@ -1,6 +1,7 @@
 package com.ty.event.event_management.service;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.ty.event.event_management.dao.AdminDao;
 import com.ty.event.event_management.dao.EventDetailsDao;
 import com.ty.event.event_management.dao.EventHallDao;
-import com.ty.event.event_management.dto.Admin;
 import com.ty.event.event_management.dto.EventDetails;
 import com.ty.event.event_management.dto.EventHall;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
@@ -27,23 +27,17 @@ public class EventHallService {
 	@Autowired
 	private EventDetailsDao eventDetailsDao;
 	
+	
 	@Autowired
 	AdminDao adminDao;
 
-	public ResponseEntity<ResponseStructure<EventHall>> saveEventHall(int aid,int edid,int ehid) {
+	public ResponseEntity<ResponseStructure<EventHall>> saveEventHall(int edid,int ehid) {
 		ResponseStructure<EventHall> responseStructure = new ResponseStructure<EventHall>();
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		Optional<EventDetails> event= eventDetailsDao.getEventDetailsById(edid);
-		Optional<Admin> admin=adminDao.getAdminById(aid);
 		Optional<EventHall> eventHall = dao.getEventHallById(ehid);
-		/*if(event.isPresent()&&admin.isPresent()&& eventHall.isPresent()) {
-			
-			event.get().setEvHall(admin.get().getEventHalls().get(ehid-1));
-		responseStructure.setMessage("Data Saved");
-		responseStructure.setData(dao.saveEventHall(admin.get().getEventHalls().get()));
-//		eventDetailsDao.updateEventDetails(details);
-		}*/
-		if (event.isPresent()&&admin.isPresent()&& eventHall.isPresent()) {
+		
+		if (event.isPresent()&& eventHall.isPresent()) {
 			event.get().setEvHall(eventHall.get());	
 			responseStructure.setMessage("Data Saved");
 			responseStructure.setData(eventHall.get());
@@ -74,6 +68,17 @@ public class EventHallService {
 		ResponseStructure<EventHall> responseStructure = new ResponseStructure<EventHall>();
 		Optional<EventHall> optional = dao.getEventHallById(id);
 		if (optional.isPresent()) {
+			List<EventDetails> list=eventDetailsDao.getAllEvent();
+			for (EventDetails eventDetails : list) {
+				
+				eventDetails.getEventTitle();
+				eventDetails.getAddress();
+				eventDetails.getEventDate();
+				eventDetails.getDuration();
+				eventDetails.getFoodRefreshment();
+				eventDetails.getEventDate();
+				
+			}
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data Fetched");
 			responseStructure.setData(optional.get());

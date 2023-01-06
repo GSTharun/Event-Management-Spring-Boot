@@ -36,8 +36,8 @@ public class EventHallController {
 	@PostMapping(produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	public ResponseEntity<ResponseStructure<EventHall>> saveEventHall(@RequestParam int aid,@RequestParam int edid,@RequestParam int ehid) {
-		return service.saveEventHall(aid,edid,ehid);
+	public ResponseEntity<ResponseStructure<EventHall>> saveEventHall(@RequestParam int edid,@RequestParam int ehid) {
+		return service.saveEventHall(edid,ehid);
 	}
 
 	@ApiOperation(value = "updateEventHall", notes = "it is used to update the eventhall")
