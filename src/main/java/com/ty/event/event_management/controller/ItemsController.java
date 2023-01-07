@@ -1,5 +1,7 @@
 package com.ty.event.event_management.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,7 @@ public class ItemsController {
 			@ApiResponse(code = 404, message = "Not Found") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Items>> saveItems(@RequestBody Items items) {
+	public ResponseEntity<ResponseStructure<Items>> saveItems(@Valid @RequestBody Items items) {
 		return service.saveItems(items);
 	}
 
@@ -44,7 +46,7 @@ public class ItemsController {
 			@ApiResponse(code = 404, message = "Not Found") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Items>> updateItems(@RequestBody Items items, @RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Items>> updateItems(@Valid @RequestBody Items items, @RequestParam int id) {
 		return service.updateItems(items, id);
 	}
 
@@ -52,7 +54,7 @@ public class ItemsController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error") })
 	@GetMapping
-	public ResponseEntity<ResponseStructure<Items>> fetchItemsById(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Items>> fetchItemsById(@Valid @RequestParam int id) {
 		return service.findItemsById(id);
 	}
 
@@ -60,7 +62,7 @@ public class ItemsController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error") })
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseStructure<Items>> deleteItemsById(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<Items>> deleteItemsById(@Valid @PathVariable int id) {
 		return service.deleteItemsById(id);
 	}
 

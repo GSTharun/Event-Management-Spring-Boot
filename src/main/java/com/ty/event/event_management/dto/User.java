@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -27,8 +29,10 @@ public class User {
 	@NotNull
 	private String address;
 	@NotNull
+	@Min(999999999)
+	@Max(9999999999L)
 	private long phoneno;
-	@Email
+	@Email(message = "Email is not valid")
 	private String email;
 	@NotNull
 	private String password;

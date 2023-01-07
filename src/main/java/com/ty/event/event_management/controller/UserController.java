@@ -1,5 +1,7 @@
 package com.ty.event.event_management.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,7 @@ public class UserController {
 			@ApiResponse(code = 404, message = "Not Found") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<User>> saveUser(@RequestBody User user) {
+	ResponseEntity<ResponseStructure<User>> saveUser(@Valid @RequestBody User user) {
 		return userService.saveUser(user);
 	}
 
@@ -44,7 +46,7 @@ public class UserController {
 			@ApiResponse(code = 404, message = "Not Found") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User user, @RequestParam int id) {
+	ResponseEntity<ResponseStructure<User>> updateUser(@Valid @RequestBody User user, @RequestParam int id) {
 		return userService.updateUser(user, id);
 	}
 
@@ -53,7 +55,7 @@ public class UserController {
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<User>> getUserById(@RequestParam int id) {
+	ResponseEntity<ResponseStructure<User>> getUserById(@Valid @RequestParam int id) {
 		return userService.getUserById(id);
 	}
 
@@ -62,7 +64,7 @@ public class UserController {
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<User>> deleteUserById(@PathVariable int id) {
+	ResponseEntity<ResponseStructure<User>> deleteUserById(@Valid @PathVariable int id) {
 		return userService.deleteUserById(id);
 	}
 

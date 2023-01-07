@@ -1,5 +1,7 @@
 package com.ty.event.event_management.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,7 @@ public class EventDetailsController {
 			@ApiResponse(code = 404, message = "Not Found") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetails(@RequestBody EventDetails eventDetails,
+	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetails(@Valid @RequestBody EventDetails eventDetails,
 			@RequestParam int uid, @RequestParam int ehid) {
 		return evService.saveEventDetails(eventDetails, uid, ehid);
 	}
@@ -45,7 +47,7 @@ public class EventDetailsController {
 			@ApiResponse(code = 404, message = "Not Found") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<EventDetails>> updateEventDetails(@RequestBody EventDetails eventDetails,
+	public ResponseEntity<ResponseStructure<EventDetails>> updateEventDetails(@Valid @RequestBody EventDetails eventDetails,
 			@RequestParam int id) {
 		return evService.updateEventDetailsById(eventDetails, id);
 	}
@@ -55,7 +57,7 @@ public class EventDetailsController {
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<EventDetails>> getEventDetailsById(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<EventDetails>> getEventDetailsById(@Valid @RequestParam int id) {
 		return evService.getEventDetailsById(id);
 	}
 
@@ -64,7 +66,7 @@ public class EventDetailsController {
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<EventDetails>> deleteEventDetailsById(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<EventDetails>> deleteEventDetailsById(@Valid @PathVariable int id) {
 		return evService.deleteEventDetailsById(id);
 	}
 

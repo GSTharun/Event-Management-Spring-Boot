@@ -1,5 +1,7 @@
 package com.ty.event.event_management.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,7 @@ public class AgentController {
 			@ApiResponse(code = 404, message = "Not Found") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<Agent>> saveAgent(@RequestBody Agent agent,@RequestParam int aid,@RequestParam int ehid) {
+	ResponseEntity<ResponseStructure<Agent>> saveAgent(@Valid @RequestBody Agent agent,@RequestParam int aid,@RequestParam int ehid) {
 		return agentService.saveAgent(agent,aid,ehid);
 	}
 
@@ -44,7 +46,7 @@ public class AgentController {
 			@ApiResponse(code = 404, message = "Not Found") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<Agent>> updateAgent(@RequestBody Agent agent,@RequestParam int id) {
+	ResponseEntity<ResponseStructure<Agent>> updateAgent(@Valid @RequestBody Agent agent,@RequestParam int id) {
 		return agentService.updateAgent(agent,id);
 	}
 
@@ -53,7 +55,7 @@ public class AgentController {
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<Agent>> getAgentById(@RequestParam int id) {
+	ResponseEntity<ResponseStructure<Agent>> getAgentById(@Valid @RequestParam int id) {
 		return agentService.getAgentById(id);
 	}
 
@@ -62,7 +64,7 @@ public class AgentController {
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<Agent>> deleteAgentById(@PathVariable int id) {
+	ResponseEntity<ResponseStructure<Agent>> deleteAgentById(@Valid @PathVariable int id) {
 		return agentService.deleteAgentById(id);
 	}
 
