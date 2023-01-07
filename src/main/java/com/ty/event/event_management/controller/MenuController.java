@@ -1,5 +1,7 @@
 package com.ty.event.event_management.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +35,7 @@ public class MenuController {
 			@ApiResponse(code=500,message="Internal server Error"),
 			@ApiResponse(code=404,message = "Not Found")})
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<ResponseStructure<Menu>> saveMenu(@RequestBody Menu menu)
+	public ResponseEntity<ResponseStructure<Menu>> saveMenu(@Valid @RequestBody Menu menu)
 	{
 		return service.saveMenu(menu);
 	}
@@ -43,7 +45,7 @@ public class MenuController {
 			@ApiResponse(code=500,message="Internal server Error"),
 			@ApiResponse(code=404,message = "Not Found")})
 	@PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<ResponseStructure<Menu>> updateMenu(@RequestBody Menu menu,@RequestParam int id)
+	public ResponseEntity<ResponseStructure<Menu>> updateMenu(@Valid @RequestBody Menu menu,@RequestParam int id)
 	{
 		return service.updateMenu(menu, id);
 	}
@@ -52,7 +54,7 @@ public class MenuController {
 	@ApiResponses(value= {@ApiResponse(code=201,message="Created"),
 			@ApiResponse(code=500,message="Internal server Error")})
 	@GetMapping
-	public ResponseEntity<ResponseStructure<Menu>> fetchMenuById(@RequestParam int id)
+	public ResponseEntity<ResponseStructure<Menu>> fetchMenuById(@Valid @RequestParam int id)
 	{
 		return service.findMenuById(id);
 	}
@@ -61,7 +63,7 @@ public class MenuController {
 	@ApiResponses(value= {@ApiResponse(code=201,message="Created"),
 			@ApiResponse(code=500,message="Internal server Error")})
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseStructure<Menu>> deleteMenuById(@PathVariable int id)
+	public ResponseEntity<ResponseStructure<Menu>> deleteMenuById(@Valid @PathVariable int id)
 	{
 		return service.deleteMenuById(id);
 	}

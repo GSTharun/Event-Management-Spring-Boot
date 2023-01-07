@@ -1,5 +1,7 @@
 package com.ty.event.event_management.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,7 @@ public class AddressController {
 			@ApiResponse(code = 404, message = "Not Found") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Address>> saveAddress(@RequestBody Address address) {
+	public ResponseEntity<ResponseStructure<Address>> saveAddress(@Valid @RequestBody Address address) {
 		return addressService.saveAddress(address);
 	}
 
@@ -44,7 +46,7 @@ public class AddressController {
 			@ApiResponse(code = 404, message = "Not Found") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Address>> updateAddress(@RequestBody Address address,
+	public ResponseEntity<ResponseStructure<Address>> updateAddress(@Valid @RequestBody Address address,
 			@RequestParam int id) {
 		return addressService.updateAddress(address, id);
 	}
@@ -54,7 +56,7 @@ public class AddressController {
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Address>> getAddressById(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Address>> getAddressById(@Valid @RequestParam int id) {
 		return addressService.getAddressById(id);
 	}
 
@@ -63,7 +65,7 @@ public class AddressController {
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Address>> deleteAddressById(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<Address>> deleteAddressById(@Valid @PathVariable int id) {
 		return addressService.deleteAddressById(id);
 	}
 

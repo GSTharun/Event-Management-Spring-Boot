@@ -1,5 +1,7 @@
 package com.ty.event.event_management.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,11 +34,9 @@ public class AdminController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-
-	ResponseEntity<ResponseStructure<Admin>> saveAdmin(@RequestBody Admin admin) {
+	ResponseEntity<ResponseStructure<Admin>> saveAdmin(@Valid @RequestBody Admin admin) {
 		return adminService.saveAdmin(admin);
 	}
 
@@ -44,11 +44,9 @@ public class AdminController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-
-	ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin,@RequestParam int id) {
+	ResponseEntity<ResponseStructure<Admin>> updateAdmin(@Valid @RequestBody Admin admin,@RequestParam int id) {
 		return adminService.updateAdmin(admin,id);
 	}
 
@@ -56,10 +54,8 @@ public class AdminController {
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-
-	ResponseEntity<ResponseStructure<Admin>> getAdminById(@RequestParam int id) {
+	ResponseEntity<ResponseStructure<Admin>> getAdminById(@Valid @RequestParam int id) {
 		return adminService.getAdminById(id);
 	}
 
@@ -67,10 +63,8 @@ public class AdminController {
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
-
-	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-
-	ResponseEntity<ResponseStructure<Admin>> deleteAdminById(@PathVariable int id) {
+	@DeleteMapping( produces = { MediaType.APPLICATION_JSON_VALUE })
+	ResponseEntity<ResponseStructure<Admin>> deleteAdminById(@Valid @RequestParam int id) {
 		return adminService.deleteAdminById(id);
 	}
 

@@ -1,5 +1,7 @@
 package com.ty.event.event_management.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,7 @@ public class EventHallsController {
 			@ApiResponse(code = 404, message = "Not Found") })
 
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<EventHalls>> saveEventHall(@RequestBody EventHalls eventHalls) {
+	public ResponseEntity<ResponseStructure<EventHalls>> saveEventHall(@Valid @RequestBody EventHalls eventHalls) {
 		return eventHallsService.saveEventHalls(eventHalls);
 	}
 
@@ -44,7 +46,7 @@ public class EventHallsController {
 			@ApiResponse(code = 404, message = "Not Found") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<EventHalls>> updateEventHall(@RequestBody EventHalls eventHall,
+	public ResponseEntity<ResponseStructure<EventHalls>> updateEventHall(@Valid @RequestBody EventHalls eventHall,
 			@RequestParam int id) {
 		return eventHallsService.updateEventHalls(eventHall, id);
 	}
@@ -54,7 +56,7 @@ public class EventHallsController {
 			@ApiResponse(code = 500, message = "internal server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<EventHalls>> getEventHallById(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<EventHalls>> getEventHallById(@Valid @RequestParam int id) {
 		return eventHallsService.getEventHallsById(id);
 	}
 
@@ -63,7 +65,7 @@ public class EventHallsController {
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found") })
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<EventHalls>> deleteEventHallById(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<EventHalls>> deleteEventHallById(@Valid @PathVariable int id) {
 		return eventHallsService.deleteEventHallsById(id);
 	}
 

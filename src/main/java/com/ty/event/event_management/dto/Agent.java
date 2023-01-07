@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -28,6 +30,8 @@ public class Agent {
 	@Email
 	private String agentemail;
 	@NotNull
+	@Min(999999999)
+	@Max(9999999999L)
 	private long phone;
 
 	@OneToOne
