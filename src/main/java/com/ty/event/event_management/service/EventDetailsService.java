@@ -21,8 +21,6 @@ import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
 import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.ResponseStructure;
 
-
-
 @Service
 public class EventDetailsService {
 
@@ -34,27 +32,27 @@ public class EventDetailsService {
 
 	@Autowired
 	private EventHallsDao eventHallsDao;
-	
+
 	public static final Logger logger = Logger.getLogger(EventDetailsService.class);
 
-
-	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetails(EventDetails eventDetails, int uid,int ehid) {
+	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetails(EventDetails eventDetails, int uid,
+			int ehid) {
 		ResponseStructure<EventDetails> responseStructure = new ResponseStructure<EventDetails>();
 		ResponseEntity<ResponseStructure<EventDetails>> responseEntity = new ResponseEntity<ResponseStructure<EventDetails>>(
 				responseStructure, HttpStatus.OK);
 		Optional<User> user = userDao.getUserById(uid);
 		Optional<EventHalls> eventhall = eventHallsDao.getEventHallsById(ehid);
-		if(user.isPresent() && eventhall.isPresent()) {
+		if (user.isPresent() && eventhall.isPresent()) {
+			eventDetails.setEventDate(eventDetails.getEventDate());
 			user.get().getEventDetails().add(eventDetails);
 			eventhall.get().getEventDetails().add(eventDetails);
 			eventDetails.setEventHalls(eventhall.get());
 			List<Items> list = eventDetails.getMenu().getItems();
-			double totalcost=0;
-			for(Items items:list)
-			{
-				totalcost = totalcost+(items.getCost()*items.getQuantity());
+			double totalcost = 0;
+			for (Items items : list) {
+				totalcost = totalcost + (items.getCost() * items.getQuantity());
 			}
-			totalcost=(totalcost *0.18)+totalcost;
+			totalcost = (totalcost * 0.18) + totalcost;
 			eventDetails.setTotalcost(totalcost);
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("saved");
@@ -76,7 +74,7 @@ public class EventDetailsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("updated");
 			responseStructure.setData(eventDetailsDao.updateEvent(eventDetails));
-logger.info("Data Updated");
+			logger.info("Data Updated");
 		} else {
 			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
@@ -113,7 +111,7 @@ logger.info("Data Updated");
 			responseStructure.setMessage("deleted");
 			responseStructure.setData(optional.get());
 			return responseEntity;
-			
+
 		} else {
 			logger.warn("Data Deleted");
 			throw new NoSuchIdFoundToDelete("No Such Id Found To Delete");

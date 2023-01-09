@@ -93,7 +93,6 @@ public class UserService {
 	public String validateUserByEmailAndPassword(String email,String password) {
 		User user=userDao.getUserByEmail(email);
 		AESencription dec=new AESencription();
-		System.out.println(user.getPassword());
 		if(password.equals(user.getPassword())){
 			return "Logged In Succesfully";
 		}
