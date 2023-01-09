@@ -2,6 +2,7 @@ package com.ty.event.event_management.service;
 
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public class ItemsService {
 
 	@Autowired
 	private ItemsDao dao;
+	public static final Logger logger = Logger.getLogger(ItemsService.class);
 
 	public ResponseEntity<ResponseStructure<Items>> saveItems(Items items) {
 		ResponseEntity<ResponseStructure<Items>> responseEntity;
@@ -28,6 +30,7 @@ public class ItemsService {
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Saved");
 		responseStructure.setData(dao.saveItems(items));
+		logger.debug("Data Saved");
 		return new ResponseEntity<ResponseStructure<Items>>(responseStructure, HttpStatus.CREATED);
 	}
 
@@ -40,6 +43,7 @@ public class ItemsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Updated");
 			responseStructure.setData(dao.updateItems(items));
+			logger.info("Data Updated");
 			return new ResponseEntity<ResponseStructure<Items>>(responseStructure, HttpStatus.OK);
 		} else {
 
@@ -57,7 +61,7 @@ public class ItemsService {
 			responseStructure.setMessage("Found");
 			responseStructure.setData(items2.get());
 		} else {
-
+			logger.fatal("Data Not Found");
 			throw new NoSuchIdFoundException();
 		}
 		return new ResponseEntity<ResponseStructure<Items>>(responseStructure, HttpStatus.OK);
@@ -73,6 +77,7 @@ public class ItemsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("deleted");
 			responseStructure.setData(optional.get());
+			logger.warn("Data Deleted");
 			return responseEntity;
 		} else {
 			throw new NoSuchIdFoundToDelete("No Such Id Found To Delete");

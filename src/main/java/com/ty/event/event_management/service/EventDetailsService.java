@@ -3,6 +3,7 @@ package com.ty.event.event_management.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,9 @@ public class EventDetailsService {
 
 	@Autowired
 	private EventHallsDao eventHallsDao;
+	
+	public static final Logger logger = Logger.getLogger(EventDetailsService.class);
+
 
 	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetails(EventDetails eventDetails, int uid,int ehid) {
 		ResponseStructure<EventDetails> responseStructure = new ResponseStructure<EventDetails>();
@@ -55,6 +59,7 @@ public class EventDetailsService {
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("saved");
 			responseStructure.setData(eventDetailsDao.saveEvent(eventDetails));
+			logger.debug("Data Saved");
 		} else {
 			throw new NoSuchIdFoundException();
 		}
@@ -71,7 +76,7 @@ public class EventDetailsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("updated");
 			responseStructure.setData(eventDetailsDao.updateEvent(eventDetails));
-
+logger.info("Data Updated");
 		} else {
 			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
@@ -90,6 +95,7 @@ public class EventDetailsService {
 			responseStructure.setData(optional.get());
 
 		} else {
+			logger.fatal("Data Not Found");
 			throw new NoSuchIdFoundException("No SUch Id Found");
 		}
 		return responseEntity;
@@ -107,7 +113,9 @@ public class EventDetailsService {
 			responseStructure.setMessage("deleted");
 			responseStructure.setData(optional.get());
 			return responseEntity;
+			
 		} else {
+			logger.warn("Data Deleted");
 			throw new NoSuchIdFoundToDelete("No Such Id Found To Delete");
 		}
 	}

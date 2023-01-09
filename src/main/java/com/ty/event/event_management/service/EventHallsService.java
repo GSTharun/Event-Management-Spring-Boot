@@ -2,6 +2,7 @@ package com.ty.event.event_management.service;
 
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class EventHallsService {
 	@Autowired
 	private EventHallsDao eventHallsDao;
 
-
+	public static final Logger logger = Logger.getLogger(EventHallsService.class);
 
 	public ResponseEntity<ResponseStructure<EventHalls>> saveEventHalls(EventHalls eventHalls) {
 		ResponseEntity<ResponseStructure<EventHalls>> responseEntity;
@@ -30,6 +31,7 @@ public class EventHallsService {
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Data saved");
 		responseStructure.setData(eventHallsDao.saveEventHalls(eventHalls));
+		logger.debug("Data Saved");
 		return new ResponseEntity<ResponseStructure<EventHalls>>(responseStructure, HttpStatus.CREATED);
 
 	}
@@ -43,6 +45,7 @@ public class EventHallsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Data updated");
 			responseStructure.setData(eventHallsDao.saveEventHalls(eventHalls));
+			logger.info("Data Updated");
 			return new ResponseEntity<ResponseStructure<EventHalls>>(responseStructure, HttpStatus.OK);
 		} else {
 			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
@@ -61,6 +64,7 @@ public class EventHallsService {
 			responseStructure.setData(eventHalls.get());
 			return new ResponseEntity<ResponseStructure<EventHalls>>(responseStructure, HttpStatus.OK);
 		}
+		logger.fatal("Data Not Found");
 		throw new NoSuchIdFoundException("No Such Id Found");
 	}
 
@@ -73,6 +77,7 @@ public class EventHallsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Deleted");
 			responseStructure.setData(optional.get());
+			logger.warn("Data Deleted");
 			return new ResponseEntity<ResponseStructure<EventHalls>>(responseStructure, HttpStatus.OK);
 		} else {
 			throw new NoSuchIdFoundToDelete("No Such ID Found To Delete");
