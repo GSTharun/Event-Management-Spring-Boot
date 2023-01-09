@@ -1,5 +1,6 @@
 package com.ty.event.event_management.exception;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +71,18 @@ public class ApplicationException extends ResponseEntityExceptionHandler{
 		responseStructure.setData(map);
 		
 		return new ResponseEntity<Object>(responseStructure,HttpStatus.BAD_REQUEST);	
+	}
+	
+	
+	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+	public ResponseEntity<ResponseStructure<String>> ForeignKeyTableCantBeDeleted(SQLIntegrityConstraintViolationException exception)
+	{
+		ResponseEntity<ResponseStructure<String>> responseEntity;
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatus(HttpStatus.BAD_REQUEST.value());
+		responseStructure.setMessage("Cannot delete a foreign key constraint fails");
+		responseStructure.setData(exception.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.BAD_REQUEST);
 	}
 	
 	
