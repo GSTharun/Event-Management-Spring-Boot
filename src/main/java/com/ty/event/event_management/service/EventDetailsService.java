@@ -34,7 +34,7 @@ public class EventDetailsService {
 
 	@Autowired
 	private EventHallsDao eventHallsDao;
-	
+
 	public static final Logger logger = Logger.getLogger(EventDetailsService.class);
 
 
@@ -76,7 +76,7 @@ public class EventDetailsService {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("updated");
 			responseStructure.setData(eventDetailsDao.updateEvent(eventDetails));
-logger.info("Data Updated");
+			logger.info("Data Updated");
 		} else {
 			throw new NoSuchIdFoundToUpdate("No Such Id Found To Update");
 		}
@@ -113,7 +113,7 @@ logger.info("Data Updated");
 			responseStructure.setMessage("deleted");
 			responseStructure.setData(optional.get());
 			return responseEntity;
-			
+
 		} else {
 			logger.warn("Data Deleted");
 			throw new NoSuchIdFoundToDelete("No Such Id Found To Delete");
