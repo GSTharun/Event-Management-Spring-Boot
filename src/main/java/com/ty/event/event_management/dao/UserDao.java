@@ -31,5 +31,9 @@ public class UserDao {
 	public void deleteUser(User user) {
 		repository.delete(user);
 	}
+	public  User getUserByEmail(String email) {
+		return repository.findUserByEmail(email);
+		
+	}
 
 }
