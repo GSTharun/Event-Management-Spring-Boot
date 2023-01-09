@@ -3,6 +3,7 @@ package com.ty.event.event_management.dto;
 
 import java.util.List;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import com.ty.event.event_management.util.AESencription;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +37,7 @@ public class User {
 	private long phoneno;
 	@Email(message = "Email is not valid")
 	private String email;
+	@Convert(converter=AESencription.class)
 	@NotNull
 	private String password;
 	@NotNull

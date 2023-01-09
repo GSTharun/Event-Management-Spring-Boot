@@ -3,6 +3,7 @@ package com.ty.event.event_management.dto;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ty.event.event_management.util.AESencription;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,11 +38,12 @@ public class Admin {
 	private long phoneno;
 	@Email(message = "Email is not valid")
 	private String email; 
+	@Convert(converter=AESencription.class)
 	@NotNull
 	private String password;
 
 	
-	@OneToMany(cascade = CascadeType.DETACH)
+	@OneToMany(cascade = CascadeType.ALL)
 	List<EventHalls> eventHalls;
 	
 
