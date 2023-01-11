@@ -32,7 +32,7 @@ public class VenueController {
 	@ApiOperation(value = "saveVenue", notes = "it is used to save the Venue")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Venue>> saveVenue(@Valid @RequestBody Venue venue, @RequestParam int aid,@RequestParam int edid) {
@@ -41,25 +41,25 @@ public class VenueController {
 	@ApiOperation(value = "updateVenue", notes = "it is used to update the Venue")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Venue>> updateEventDetails(@Valid @RequestBody Venue venue,@RequestParam int id) {
 		return venueService.updateVenueById(venue, id);
 	}
-	@ApiOperation(value = "getVenueById", notes = "it is used to get the venue by id")
+	@ApiOperation(value = "getVenueById", notes = "it is used to get the Venue by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Venue>> getEventDetailsById(@Valid @RequestParam int id) {
 		return venueService.getVenueById(id);
 	}
 
-	@ApiOperation(value = "deleteVenue", notes = "it is used to delete the venue by id")
+	@ApiOperation(value = "deleteVenue", notes = "it is used to delete the Venue by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internel server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Venue>> deleteVenueById(@Valid @PathVariable int id) {
 		return venueService.deleteVenueById(id);

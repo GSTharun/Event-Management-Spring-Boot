@@ -26,14 +26,14 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("admin")
 public class AdminController {
-	
+
 	@Autowired
 	private AdminService adminService;
-	
+
 	@ApiOperation(value = "saveAdmin", notes = "it is used to save the Admin")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity<ResponseStructure<Admin>> saveAdmin(@Valid @RequestBody Admin admin) {
@@ -43,7 +43,7 @@ public class AdminController {
 	@ApiOperation(value = "updateAdmin", notes = "it is used to update the Admin")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity<ResponseStructure<Admin>> updateAdmin(@Valid @RequestBody Admin admin,@RequestParam int id) {
@@ -53,7 +53,7 @@ public class AdminController {
 	@ApiOperation(value = "getAdminById", notes = "it is used to get the Admin by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found") ,@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed")})
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity<ResponseStructure<Admin>> getAdminById(@Valid @RequestParam int id) {
 		return adminService.getAdminById(id);
@@ -62,7 +62,7 @@ public class AdminController {
 	@ApiOperation(value = "deleteAdmin", notes = "it is used to delete the Admin by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internel server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@DeleteMapping( produces = { MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity<ResponseStructure<Admin>> deleteAdminById(@Valid @RequestParam int id) {
 		return adminService.deleteAdminById(id);
