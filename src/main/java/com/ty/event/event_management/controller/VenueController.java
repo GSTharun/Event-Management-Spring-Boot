@@ -26,6 +26,7 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("venue")
 public class VenueController {
+	
 	@Autowired
 	private VenueService venueService;
 
