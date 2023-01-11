@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.ty.event.event_management.dao.AdminDao;
 import com.ty.event.event_management.dao.EventDetailsDao;
+import com.ty.event.event_management.dao.UserDao;
 import com.ty.event.event_management.dao.VenueDao;
 import com.ty.event.event_management.dto.Admin;
 import com.ty.event.event_management.dto.EventDetails;
+import com.ty.event.event_management.dto.User;
 import com.ty.event.event_management.dto.Venue;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
 import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
@@ -24,29 +26,28 @@ public class VenueService {
 	@Autowired
 	private VenueDao venueDao;
 
+//	@Autowired
+//	private AdminDao adminDao;
+//	
 	@Autowired
-	private AdminDao adminDao;
+	private UserDao userDao;
 
-	@Autowired
-	private EventDetailsDao eventDetailsDao;
+//	@Autowired 
+//	private EventDetailsDao eventDetailsDao;
 
 	public static final Logger logger = Logger.getLogger(VenueService.class);
 
-	public ResponseEntity<ResponseStructure<Venue>> saveVenue(Venue venue, int aid,int edid) {
+	public ResponseEntity<ResponseStructure<Venue>> saveVenue(Venue venue,int uid) {
 		ResponseStructure<Venue> responseStructure = new ResponseStructure<Venue>();
 		ResponseEntity<ResponseStructure<Venue>> responseEntity = new ResponseEntity<ResponseStructure<Venue>>(
 				responseStructure, HttpStatus.OK);
-		Optional<Admin> admin = adminDao.getAdminById(aid);
-		Optional<EventDetails> eventDetails = eventDetailsDao.getEventById(edid);
-		if (admin.isPresent() && eventDetails.isPresent()) {
-			venue.setAdmin(admin.get());
-			venue.setEventDetails(eventDetails.get());
-			EventDetails eventDetails2 = null;
-			double cost = eventDetails2.getTotalcost();
-			double finalcost = 0;
-			finalcost = finalcost + (cost + eventDetails.get().getEventHalls().getCost());
-			finalcost = (finalcost * 0.18) + finalcost;
-			venue.setFinalcost(finalcost);
+//		Optional<Admin> admin = adminDao.getAdminById(aid);
+		Optional<User> user= userDao.getUserById(uid);
+		//Optional<EventDetails> eventDetail = eventDetailsDao.getEventById(edid);
+		if (user.isPresent()) {
+//			venue.setAdmin(admin.get());
+			venue.setUser(user.get());
+//			venue.setEventDetails(eventDetail.get());
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setData(venueDao.saveVenue(venue));
 			responseStructure.setMessage("Saved");
