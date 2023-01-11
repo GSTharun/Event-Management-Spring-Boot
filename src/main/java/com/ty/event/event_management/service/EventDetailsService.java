@@ -50,7 +50,7 @@ public class EventDetailsService {
 			List<Items> list = eventDetails.getMenu().getItems();
 			double totalcost = 0;
 			for (Items items : list) {
-				totalcost = totalcost + (items.getCost() * items.getQuantity());
+				totalcost = totalcost + (items.getCost() * items.getQuantity()+eventDetails.getEventHalls().getCost());
 			}
 			totalcost = (totalcost * 0.18) + totalcost;
 			eventDetails.setTotalcost(totalcost);

@@ -1,6 +1,5 @@
 package com.ty.event.event_management.dto;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,12 +20,15 @@ public class Venue {
 	private int venueid;
 	@NotNull
 	private String venuename;
-	@NotNull
-	private double finalcost;
+	
+	
+//	@OneToOne
+//	private Admin admin;
 	
 	@OneToOne
-	private Admin admin;
+	private User user;
 	
-	@OneToOne
-	private EventDetails eventDetails;
+//	@OneToOne
+//	private EventDetails eventDetails;
+	
 }
