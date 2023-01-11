@@ -33,7 +33,7 @@ public class ItemsController {
 	@ApiOperation(value = "Save Items", notes = "Its is used to save items")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Items>> saveItems(@Valid @RequestBody Items items) {
@@ -43,7 +43,7 @@ public class ItemsController {
 	@ApiOperation(value = "update Items", notes = "Its is used to update Items")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal server Error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Items>> updateItems(@Valid @RequestBody Items items, @RequestParam int id) {
@@ -52,7 +52,8 @@ public class ItemsController {
 
 	@ApiOperation(value = "fetch Items", notes = "Its is used to fetch Items")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
-			@ApiResponse(code = 500, message = "Internal server Error") })
+			@ApiResponse(code = 500, message = "Internal server Error"),@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),
+			@ApiResponse(code = 405, message = "Method Not Allowed")  })
 	@GetMapping
 	public ResponseEntity<ResponseStructure<Items>> fetchItemsById(@Valid @RequestParam int id) {
 		return service.findItemsById(id);
@@ -60,7 +61,8 @@ public class ItemsController {
 
 	@ApiOperation(value = "delete Items", notes = "Its is used to delete Items")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
-			@ApiResponse(code = 500, message = "Internal server Error") })
+			@ApiResponse(code = 500, message = "Internal server Error"),@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),
+			@ApiResponse(code = 405, message = "Method Not Allowed")  })
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ResponseStructure<Items>> deleteItemsById(@Valid @PathVariable int id) {
 		return service.deleteItemsById(id);

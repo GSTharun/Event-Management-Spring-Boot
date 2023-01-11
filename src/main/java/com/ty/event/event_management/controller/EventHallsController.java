@@ -26,14 +26,14 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("eventhalls")
 public class EventHallsController {
-	
+
 	@Autowired
 	private EventHallsService eventHallsService;
 
 	@ApiOperation(value = "saveEventHall", notes = "it is used to save the eventhall")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<EventHalls>> saveEventHall(@Valid @RequestBody EventHalls eventHalls) {
@@ -43,7 +43,7 @@ public class EventHallsController {
 	@ApiOperation(value = "updateEventHall", notes = "it is used to update the eventhall")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found") ,@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed")})
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<EventHalls>> updateEventHall(@Valid @RequestBody EventHalls eventHall,
@@ -54,7 +54,7 @@ public class EventHallsController {
 	@ApiOperation(value = "getEventHallById", notes = "it is used to get the EventHall by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<EventHalls>> getEventHallById(@Valid @RequestParam int id) {
 		return eventHallsService.getEventHallsById(id);
@@ -63,7 +63,7 @@ public class EventHallsController {
 	@ApiOperation(value = "deleteEventHall", notes = "it is used to delete the eventhall by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internel server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<EventHalls>> deleteEventHallById(@Valid @PathVariable int id) {
 		return eventHallsService.deleteEventHallsById(id);
