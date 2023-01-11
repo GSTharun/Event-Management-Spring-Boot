@@ -26,14 +26,15 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("agent")
 public class AgentController {
-	
+
 	@Autowired
 	private AgentService agentService;
+
 
 	@ApiOperation(value = "saveAgent", notes = "it is used to save the Agent")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity<ResponseStructure<Agent>> saveAgent(@Valid @RequestBody Agent agent,@RequestParam int aid,@RequestParam int ehid) {
@@ -43,7 +44,7 @@ public class AgentController {
 	@ApiOperation(value = "updateAgent", notes = "it is used to update the Agent")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity<ResponseStructure<Agent>> updateAgent(@Valid @RequestBody Agent agent,@RequestParam int id) {
@@ -53,7 +54,7 @@ public class AgentController {
 	@ApiOperation(value = "getAgentById", notes = "it is used to get the Agent by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internal server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity<ResponseStructure<Agent>> getAgentById(@Valid @RequestParam int id) {
 		return agentService.getAgentById(id);
@@ -62,7 +63,7 @@ public class AgentController {
 	@ApiOperation(value = "deleteAgent", notes = "it is used to delete the Agent by id")
 	@ApiResponses(value = { @ApiResponse(code = 302, message = "found"),
 			@ApiResponse(code = 500, message = "internel server error"),
-			@ApiResponse(code = 404, message = "Not Found") })
+			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity<ResponseStructure<Agent>> deleteAgentById(@Valid @PathVariable int id) {
 		return agentService.deleteAgentById(id);
