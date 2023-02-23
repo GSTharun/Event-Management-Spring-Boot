@@ -23,8 +23,13 @@ public class EventDetailsDao {
 		return repository.save(eventDetails);
 	}
 	
-	public Optional<EventDetails> getEventById(int id){
-		return repository.findById(id);
+	public EventDetails getEventById(int id){
+		Optional<EventDetails>optional= repository.findById(id);
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
+		
 	}
 	
 	public void deleteEvent(EventDetails eventDetails) {

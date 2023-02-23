@@ -3,6 +3,7 @@ package com.ty.event.event_management.dto;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,6 +33,7 @@ public class EventDetails {
 	@NotNull
 	private String address;
 	@NotNull
+	@Column(unique=true)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime eventDate;
 	@NotNull

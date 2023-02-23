@@ -68,8 +68,8 @@ public class EventDetailsService {
 		ResponseStructure<EventDetails> responseStructure = new ResponseStructure<EventDetails>();
 		ResponseEntity<ResponseStructure<EventDetails>> responseEntity = new ResponseEntity<ResponseStructure<EventDetails>>(
 				responseStructure, HttpStatus.OK);
-		Optional<EventDetails> optional = eventDetailsDao.getEventById(eid);
-		if (optional.isPresent()) {
+		EventDetails optional = eventDetailsDao.getEventById(eid);
+		if (optional!=null) {
 			eventDetails.setEventId(eid);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("updated");
@@ -85,12 +85,12 @@ public class EventDetailsService {
 		ResponseStructure<EventDetails> responseStructure = new ResponseStructure<EventDetails>();
 		ResponseEntity<ResponseStructure<EventDetails>> responseEntity = new ResponseEntity<ResponseStructure<EventDetails>>(
 				responseStructure, HttpStatus.OK);
-		Optional<EventDetails> optional = eventDetailsDao.getEventById(id);
-		if (optional.isPresent()) {
+		EventDetails optional = eventDetailsDao.getEventById(id);
+		if (optional!=null) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("received");
-			System.out.println(optional.get().toString());
-			responseStructure.setData(optional.get());
+			System.out.println(optional);
+			responseStructure.setData(optional);
 		} else {
 			logger.fatal("Data Not Found");
 			throw new NoSuchIdFoundException("No SUch Id Found");
@@ -103,12 +103,12 @@ public class EventDetailsService {
 		ResponseStructure<EventDetails> responseStructure = new ResponseStructure<EventDetails>();
 		ResponseEntity<ResponseStructure<EventDetails>> responseEntity = new ResponseEntity<ResponseStructure<EventDetails>>(
 				responseStructure, HttpStatus.OK);
-		Optional<EventDetails> optional = eventDetailsDao.getEventById(id);
-		if (optional.isPresent()) {
-			eventDetailsDao.deleteEvent(optional.get());
+		EventDetails optional = eventDetailsDao.getEventById(id);
+		if (optional!=null) {
+			eventDetailsDao.deleteEvent(optional);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("deleted");
-			responseStructure.setData(optional.get());
+			responseStructure.setData(optional);
 			return responseEntity;
 
 		} else {
