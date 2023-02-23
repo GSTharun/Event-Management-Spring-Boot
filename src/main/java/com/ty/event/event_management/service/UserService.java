@@ -1,5 +1,7 @@
 package com.ty.event.event_management.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.ty.event.event_management.dao.UserDao;
 import com.ty.event.event_management.dto.User;
+import com.ty.event.event_management.dto.UserEmails;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
 import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.AESencription;
@@ -28,7 +31,7 @@ public class UserService {
 
 		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
 		responseStructure.setStatus(HttpStatus.CREATED.value());
-		responseStructure.setMessage("Data saved");
+		responseStructure.setMessage("Data saved");		
 		responseStructure.setData(userDao.saveUser(user));
 		logger.debug("data Saved");
 		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.CREATED);
@@ -88,13 +91,41 @@ public class UserService {
 		}
 	}
 
-	public String validateUserByEmailAndPassword(String email, String password) {
+	public ResponseEntity<ResponseStructure<String>> validateUserByEmailAndPassword(String email, String password) {
 		User user = userDao.getUserByEmail(email);
 		AESencription dec = new AESencription();
-		if (password.equals(user.getPassword())) {
-			return "Logged In Succesfully";
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+
+		ResponseEntity<ResponseStructure<String>> responseEntity;
+		
+		
+		if(user!=null) {
+			if (password.equals(user.getPassword())) {
+				
+				responseStructure.setStatus(HttpStatus.OK.value());
+				responseStructure.setMessage("User Found");
+				responseStructure.setData("Logged In Succesfully");
+				responseEntity=new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.OK);
+				
+			}else {
+				responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+				responseStructure.setMessage("User Not Found");
+				responseStructure.setData("Incorrect Password");
+				responseEntity=new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.NOT_FOUND);
+
+			}
+		}else {
+			responseStructure.setStatus(HttpStatus.FORBIDDEN.value());
+			responseStructure.setMessage("Wrong Email and Password");
+			responseStructure.setData("invalid User");
+			responseEntity=new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.FORBIDDEN);
+
 		}
-		return "Invalid Pasword";
+		
+		
+		return responseEntity;
 	}
 
+	
+	
 }

@@ -3,6 +3,7 @@ package com.ty.event.event_management.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,7 +38,8 @@ public class User {
 	@Max(9999999999L)
 	private long phoneno;
 	@Email(message = "Email is not valid")
-	private String email;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<UserEmails> userEmail;
 	@Convert(converter=AESencription.class)
 	@NotNull
 	private String password;
