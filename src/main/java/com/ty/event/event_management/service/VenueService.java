@@ -1,5 +1,6 @@
 package com.ty.event.event_management.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
@@ -17,6 +18,7 @@ import com.ty.event.event_management.dto.Admin;
 import com.ty.event.event_management.dto.EventDetails;
 import com.ty.event.event_management.dto.EventHalls;
 import com.ty.event.event_management.dto.User;
+import com.ty.event.event_management.dto.UserEmails;
 import com.ty.event.event_management.dto.Venue;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
 import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
@@ -54,9 +56,13 @@ public class VenueService {
 					+ eventDetails.getAddress() + "\nEvent Date: " + eventDetails.getEventDate() + "\nEvent Duration: "
 					+ eventDetails.getDuration() + "\nEvent Cost: " + eventDetails.getTotalcost() + "\nEvent Hall Name: "
 					+ eventHalls.getHallname() ;
-			sendEmail.sendMail(user.getEmail(), body, "Your Event Details as been confirmed");
+			List<UserEmails> userEmails=user.getEmails();
+			
+			for (UserEmails userEmails2 : userEmails) {
+				sendEmail.sendMail(userEmails2.getUserEmail(), body, "Your Event Details as been confirmed");
+			}
 			responseStructure.setStatus(HttpStatus.CREATED.value());
-			responseStructure.setMessage("Email Sent " + user.getEmail());
+			responseStructure.setMessage("Email Sent " + user.getEmails());
 			logger.debug("Data Saved");
 		} else {
 			throw new NoSuchIdFoundException();
