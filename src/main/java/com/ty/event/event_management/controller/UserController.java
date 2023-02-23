@@ -69,7 +69,7 @@ public class UserController {
 		return userService.deleteUserById(id);
 	}
 	@PatchMapping
-	public String validateUserByEmailAndPassword(@RequestParam String email,String password) {
+	public ResponseEntity<ResponseStructure<String>> validateUserByEmailAndPassword(@RequestParam String email,String password) {
 		return userService.validateUserByEmailAndPassword(email, password);
 	}
 }
