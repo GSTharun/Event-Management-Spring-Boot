@@ -40,6 +40,7 @@ public class User {
 	private long phoneno;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<UserEmails> emails;
+
 	@Convert(converter=AESencription.class)
 	@NotNull
 	private String password;

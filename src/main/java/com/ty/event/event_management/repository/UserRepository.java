@@ -8,4 +8,5 @@ import com.ty.event.event_management.dto.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 
 	User findUserByEmails(String emails);
+
 }
