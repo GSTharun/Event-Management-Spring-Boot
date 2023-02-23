@@ -10,25 +10,18 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Entity
 public class Venue {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int venueid;
 	@NotNull
 	private String venuename;
-	
-	
-//	@OneToOne
-//	private Admin admin;
-	
+
 	@OneToOne
-	private User user;
-	
-//	@OneToOne
-//	private EventDetails eventDetails;
-	
+	private Admin admin;
+
 }

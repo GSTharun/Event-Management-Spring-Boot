@@ -36,8 +36,8 @@ public class VenueController {
 			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Venue>> saveVenue(@Valid @RequestBody Venue venue, @RequestParam int uid) {
-		return venueService.saveVenue(venue, uid);
+	public ResponseEntity<ResponseStructure<Venue>> saveVenue(@Valid @RequestBody Venue venue, @RequestParam int aid) {
+		return venueService.saveVenue(venue, aid);
 	}
 	@ApiOperation(value = "updateVenue", notes = "it is used to update the Venue")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),

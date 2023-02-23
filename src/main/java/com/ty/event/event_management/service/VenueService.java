@@ -9,12 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ty.event.event_management.dao.AdminDao;
-import com.ty.event.event_management.dao.EventDetailsDao;
-import com.ty.event.event_management.dao.UserDao;
 import com.ty.event.event_management.dao.VenueDao;
 import com.ty.event.event_management.dto.Admin;
-import com.ty.event.event_management.dto.EventDetails;
-import com.ty.event.event_management.dto.User;
 import com.ty.event.event_management.dto.Venue;
 import com.ty.event.event_management.exception.NoSuchIdFoundException;
 import com.ty.event.event_management.exception.NoSuchIdFoundToDelete;
@@ -26,28 +22,18 @@ public class VenueService {
 	@Autowired
 	private VenueDao venueDao;
 
-//	@Autowired
-//	private AdminDao adminDao;
-//	
 	@Autowired
-	private UserDao userDao;
-
-//	@Autowired 
-//	private EventDetailsDao eventDetailsDao;
+	private AdminDao adminDao;
 
 	public static final Logger logger = Logger.getLogger(VenueService.class);
 
-	public ResponseEntity<ResponseStructure<Venue>> saveVenue(Venue venue,int uid) {
+	public ResponseEntity<ResponseStructure<Venue>> saveVenue(Venue venue,int aid) {
 		ResponseStructure<Venue> responseStructure = new ResponseStructure<Venue>();
 		ResponseEntity<ResponseStructure<Venue>> responseEntity = new ResponseEntity<ResponseStructure<Venue>>(
 				responseStructure, HttpStatus.OK);
-//		Optional<Admin> admin = adminDao.getAdminById(aid);
-		Optional<User> user= userDao.getUserById(uid);
-		//Optional<EventDetails> eventDetail = eventDetailsDao.getEventById(edid);
-		if (user.isPresent()) {
-//			venue.setAdmin(admin.get());
-			venue.setUser(user.get());
-//			venue.setEventDetails(eventDetail.get());
+		Optional<Admin> admin = adminDao.getAdminById(aid);
+		if (admin.isPresent()) {
+			venue.setAdmin(admin.get());
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setData(venueDao.saveVenue(venue));
 			responseStructure.setMessage("Saved");

@@ -91,7 +91,6 @@ public class EventDetailsService {
 			responseStructure.setMessage("received");
 			System.out.println(optional.get().toString());
 			responseStructure.setData(optional.get());
-
 		} else {
 			logger.fatal("Data Not Found");
 			throw new NoSuchIdFoundException("No SUch Id Found");
