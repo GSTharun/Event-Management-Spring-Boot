@@ -35,7 +35,7 @@ public class UserService {
 		List<UserEmails> userEmails=user.getEmails();
 		
 		for (UserEmails userEmails2 : userEmails) {
-			user.setEmails(userEmails);
+			userEmails2.setUser(user);
 		}
 		
 		responseStructure.setData(userDao.saveUser(user));
