@@ -32,6 +32,12 @@ public class UserService {
 		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("Data saved");		
+		List<UserEmails> userEmails=user.getUserEmails();
+		
+		for (UserEmails userEmails2 : userEmails) {
+			user.setUserEmails(userEmails);
+		}
+		
 		responseStructure.setData(userDao.saveUser(user));
 		logger.debug("data Saved");
 		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.CREATED);

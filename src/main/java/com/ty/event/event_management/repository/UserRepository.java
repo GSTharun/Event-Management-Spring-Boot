@@ -8,5 +8,5 @@ import com.ty.event.event_management.dto.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 
 	@Query(value = "Select u from User u where u.email=?1")
-	User findUserByEmail(String email);
+	public User findUserByEmail(String email);
 }

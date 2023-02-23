@@ -39,7 +39,7 @@ public class User {
 	private long phoneno;
 	@Email(message = "Email is not valid")
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private List<UserEmails> userEmail;
+	private List<UserEmails> userEmails;
 	@Convert(converter=AESencription.class)
 	@NotNull
 	private String password;
