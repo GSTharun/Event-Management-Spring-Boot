@@ -3,7 +3,6 @@ package com.ty.event.event_management.service;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
-import org.hibernate.event.internal.EntityCopyAllowedLoggedObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +14,6 @@ import com.ty.event.event_management.exception.NoSuchIdFoundException;
 import com.ty.event.event_management.exception.NoSuchIdFoundToUpdate;
 import com.ty.event.event_management.util.AESencription;
 import com.ty.event.event_management.util.ResponseStructure;
-
-
 
 @Service
 public class UserService {
@@ -90,10 +87,11 @@ public class UserService {
 			throw new NoSuchIdFoundException("No Such Id Found To Delete");
 		}
 	}
-	public String validateUserByEmailAndPassword(String email,String password) {
-		User user=userDao.getUserByEmail(email);
-		AESencription dec=new AESencription();
-		if(password.equals(user.getPassword())){
+
+	public String validateUserByEmailAndPassword(String email, String password) {
+		User user = userDao.getUserByEmail(email);
+		AESencription dec = new AESencription();
+		if (password.equals(user.getPassword())) {
 			return "Logged In Succesfully";
 		}
 		return "Invalid Pasword";
