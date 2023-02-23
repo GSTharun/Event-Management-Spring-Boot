@@ -32,7 +32,7 @@ public class UserDao {
 		repository.delete(user);
 	}
 	public  User getUserByEmail(String email) {
-		return repository.findUserByEmail(email);
+		return repository.findUserByEmails(email);
 		
 	}
 

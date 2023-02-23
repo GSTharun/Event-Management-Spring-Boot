@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.ty.event.event_management.util.AESencription;
@@ -37,9 +38,8 @@ public class User {
 	@Min(999999999)
 	@Max(9999999999L)
 	private long phoneno;
-	@Email(message = "Email is not valid")
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private List<UserEmails> userEmail;
+	private List<UserEmails> emails;
 	@Convert(converter=AESencription.class)
 	@NotNull
 	private String password;
