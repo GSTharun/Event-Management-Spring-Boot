@@ -24,7 +24,7 @@ public class UserDao {
 		return repository.save(user);
 	}
 
-	public Optional<User> getUserById(int id) {
+	public Optional<User> getUserById(String id) {
 		return repository.findById(id);
 	}
 

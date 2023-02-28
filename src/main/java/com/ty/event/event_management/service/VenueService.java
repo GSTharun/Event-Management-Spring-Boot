@@ -42,7 +42,7 @@ public class VenueService {
 
 	public static final Logger logger = Logger.getLogger(VenueService.class);
 
-	public ResponseEntity<ResponseStructure<Venue>> sendEmail(int uid, int edid,int ehid) {
+	public ResponseEntity<ResponseStructure<Venue>> sendEmail(String uid, int edid,int ehid) {
 		ResponseStructure<Venue> responseStructure = new ResponseStructure<Venue>();
 		ResponseEntity<ResponseStructure<Venue>> responseEntity = new ResponseEntity<ResponseStructure<Venue>>(
 				responseStructure, HttpStatus.OK);
