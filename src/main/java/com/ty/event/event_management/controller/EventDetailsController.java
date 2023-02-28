@@ -37,7 +37,7 @@ public class EventDetailsController {
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetails(@Valid @RequestBody EventDetails eventDetails,
-			@RequestParam int uid, @RequestParam int ehid) {
+			@RequestParam String uid, @RequestParam int ehid) {
 		return evService.saveEventDetails(eventDetails, uid, ehid);
 	}
 

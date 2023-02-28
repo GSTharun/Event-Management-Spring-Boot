@@ -47,7 +47,7 @@ public class UserController {
 			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<User>> updateUser(@Valid @RequestBody User user, @RequestParam int id) {
+	ResponseEntity<ResponseStructure<User>> updateUser(@Valid @RequestBody User user, @RequestParam String id) {
 		return userService.updateUser(user, id);
 	}
 
@@ -56,7 +56,7 @@ public class UserController {
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<User>> getUserById(@Valid @RequestParam int id) {
+	ResponseEntity<ResponseStructure<User>> getUserById(@Valid @RequestParam String id) {
 		return userService.getUserById(id);
 	}
 
@@ -65,7 +65,7 @@ public class UserController {
 			@ApiResponse(code = 500, message = "internel server error"),
 			@ApiResponse(code = 404, message = "Not Found"),@ApiResponse(code = 403, message = "Forbidden"),@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	ResponseEntity<ResponseStructure<User>> deleteUserById(@Valid @PathVariable int id) {
+	ResponseEntity<ResponseStructure<User>> deleteUserById(@Valid @PathVariable String id) {
 		return userService.deleteUserById(id);
 	}
 	@PatchMapping

@@ -35,7 +35,7 @@ public class EventDetailsService {
 
 	public static final Logger logger = Logger.getLogger(EventDetailsService.class);
 
-	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetails(EventDetails eventDetails, int uid,
+	public ResponseEntity<ResponseStructure<EventDetails>> saveEventDetails(EventDetails eventDetails, String uid,
 			int ehid) {
 		ResponseStructure<EventDetails> responseStructure = new ResponseStructure<EventDetails>();
 		ResponseEntity<ResponseStructure<EventDetails>> responseEntity = new ResponseEntity<ResponseStructure<EventDetails>>(

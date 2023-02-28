@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.ty.event.event_management.dto.User;
 
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface UserRepository extends JpaRepository<User, String>{
 
 	User findUserByEmails(String emails);
 

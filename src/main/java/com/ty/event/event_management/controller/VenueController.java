@@ -37,7 +37,7 @@ public class VenueController {
 			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 403, message = "Forbidden"),
 			@ApiResponse(code = 405, message = "Method Not Allowed") })
 	@PatchMapping
-	public ResponseEntity<ResponseStructure<Venue>> SendTocken(@Valid @RequestParam int uid, @RequestParam int edid,@RequestParam int ehid) {
+	public ResponseEntity<ResponseStructure<Venue>> SendTocken(@Valid @RequestParam String uid, @RequestParam int edid,@RequestParam int ehid) {
 		return venueService.sendEmail(uid, edid,ehid);
 	}
 
